@@ -1,0 +1,69 @@
+body {
+    background-color: blueviolet;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.app {
+    max-width: 400px;
+    margin: auto;
+}
+
+.showCard {
+    background-color: white;
+    color: blueviolet;
+    display: inline-block;
+    border-radius: 15px;
+}
+
+.showImage img{
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+}
+
+h1 {
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.showTitle {
+    font-size: large;
+    font-weight: 700;
+}
+
+.showDescription {
+    font-size: small;
+}
+
+.showData {
+    padding: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+.reviewsSection {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: inherit 0;
+}
+
+li{
+    background-color: violet;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 100%;
+}
