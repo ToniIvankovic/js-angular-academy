@@ -23,13 +23,14 @@
         </div>
         <h2>Reviews</h2>
         <div class="reviewsSection">
-            <textarea type="text" placeholder="Add review" rows="3" cols="50"></textarea>
-            <input type="text" placeholder="Add rating">
-            <input type="button" value="Post">
+            <textarea id="reviewText" type="text" placeholder="Add review" rows="3"></textarea>
+            <input id="reviewScore" min="1" max="5" type="number" onblur="checkValidity()" placeholder="Add rating">
+            <input id="postButton" type="button" value="Post">
             <ul class="reviewsList">
                 <!-- reviews go here -->
             </ul>    
         </div>
     </div>
+    <script src="index.js"></script>
 </body>
 </html>

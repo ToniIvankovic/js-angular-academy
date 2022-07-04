@@ -58,7 +58,7 @@ input, textarea {
 ul {
     list-style-type: none;
     padding: 0;
-    margin: inherit 0;
+    margin: 0;
 }
 
 li{
@@ -66,4 +66,5 @@ li{
     border-radius: 15px;
     padding: 20px;
     max-width: 100%;
+    margin-top: 20px;
 }
