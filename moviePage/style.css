@@ -1,5 +1,7 @@
 body {
-    background-color: blueviolet;
+    background-color: rgb(162, 102, 215);
+    background-image: url("./images/bgnd_opacity.png");
+    background-size: 20%;
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -62,7 +64,8 @@ ul {
 }
 
 li{
-    background-color: violet;
+    background-color: rgb(228, 196, 132);
+    color: black;
     border-radius: 15px;
     padding: 20px;
     max-width: 100%;
