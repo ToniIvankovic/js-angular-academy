@@ -1,4 +1,4 @@
-let storageReviews = JSON.parse(localStorage.getItem("reviews")); //zašto raditi stringify/parse
+let storageReviews = JSON.parse(localStorage.getItem("reviews"));
 if(!storageReviews){
     storageReviews = [];
 }
