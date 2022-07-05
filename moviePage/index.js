@@ -1,5 +1,9 @@
-const reviews = [];
+let storageReviews = JSON.parse(localStorage.getItem("reviews")); //zašto raditi stringify/parse
+if(!storageReviews){
+    storageReviews = [];
+}
 
+const reviews = storageReviews;
 const list = document.querySelector(".reviewsList");
 const reviewTextField = document.querySelector("#reviewText");
 const reviewScoreField = document.querySelector("#reviewScore");
@@ -46,6 +50,7 @@ postButton.addEventListener('click', (event) =>{
     }
     clearReviewFields();
     reviews.push(review);
+    localStorage.setItem("reviews", JSON.stringify(reviews));
     renderReviews(reviews);
 })
 
@@ -58,3 +63,5 @@ reviewScoreField.addEventListener('change', (event) => {
         reviewScoreField.style.border = "unset";
     }
 });
+
+renderReviews(reviews);
