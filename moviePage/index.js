@@ -20,10 +20,24 @@ function renderReviews(reviews){
         const listItem = document.createElement("li");
         const reviewText = document.createElement("p");
         reviewText.textContent = "Review:\n" + review.text;
-        const reviewScore = document.createElement("p");
+
+        const scoreAndDeleteDiv = document.createElement("div");
+        scoreAndDeleteDiv.className = "flexBetween"
+
+        const reviewScore = document.createElement("div");
         reviewScore.textContent = "Score: " + review.score + "/5";
+        reviewScore.style.display = "inline";
+        
+        const deleteButton = document.createElement("img");
+        deleteButton.src = "./images/delete.png";
+        deleteButton.className = "deleteIcon";
+        deleteButton.onclick = () => deleteReview(review);
+        
+        scoreAndDeleteDiv.appendChild(reviewScore);
+        scoreAndDeleteDiv.appendChild(deleteButton);
+
         listItem.appendChild(reviewText);
-        listItem.appendChild(reviewScore);
+        listItem.appendChild(scoreAndDeleteDiv);
         list.appendChild(listItem);
     });
 }
@@ -50,7 +64,7 @@ postButton.addEventListener('click', (event) =>{
     }
     clearReviewFields();
     reviews.push(review);
-    localStorage.setItem("reviews", JSON.stringify(reviews));
+    saveReviewsToStorage(reviews);
     renderReviews(reviews);
 })
 
@@ -63,5 +77,15 @@ reviewScoreField.addEventListener('change', (event) => {
         reviewScoreField.style.border = "unset";
     }
 });
+
+function saveReviewsToStorage(reviews) {
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+}
+
+function deleteReview(review){
+    reviews.pop(reviews.indexOf(review));
+    saveReviewsToStorage(reviews);
+    renderReviews(reviews);
+}
 
 renderReviews(reviews);
