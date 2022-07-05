@@ -1,17 +1,18 @@
 body {
-    background-color: rgb(162, 102, 215);
+    background-color: rgb(155, 79, 230);
     background-image: url("./images/bgnd_opacity.png");
     background-size: 20%;
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
 .app {
     max-width: 400px;
     margin: auto;
 }
 
-.showCard {
+.showCard, input[type="button"] {
     background-color: white;
     color: blueviolet;
     display: inline-block;
@@ -26,6 +27,11 @@ body {
 h1 {
     font-size: x-large;
     font-weight: 700;
+}
+
+input[type="button"] {
+    font-size: large;
+    font-weight: 500;
 }
 
 .showTitle {
@@ -43,6 +49,7 @@ h1 {
 
 textarea {
     resize: none;
+    font-family: inherit;
 }
 
 .reviewsSection {
