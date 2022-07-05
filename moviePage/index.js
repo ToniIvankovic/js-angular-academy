@@ -48,55 +48,60 @@ function clearReviews(){
 function renderReviews(reviews){
     clearReviews()
     reviews.forEach(review => {
-        const listItem = document.createElement("li");
-        const reviewText = document.createElement("p");
-        reviewText.textContent = "Review:\n" + review.text;
-
-        const scoreAndDeleteDiv = document.createElement("div");
-        scoreAndDeleteDiv.className = "flexBetween"
-
-        const reviewScore = document.createElement("div");
-        reviewScore.textContent = "Score: ";
-        reviewScore.classList = "verticallyCentered reviewScore";
-        
-        const reviewStars = document.createElement("div");
-        for(i=0; i<5; i++){
-            const star = document.createElement("img");
-            star.className = "existingStar";
-            if(i < review.score){
-                star.src = "./images/yellowStar.png";
-            } else{
-                star.src = "./images/greyStar.png";
-            }
-            reviewStars.appendChild(star);
-        }
-        reviewStars.className = "reviewStars"
-
-        const reviewScoreNumber = document.createElement("div");
-        reviewScoreNumber.textContent = "(" + review.score + "/5)";
-        reviewScoreNumber.classList = "verticallyCentered reviewScore";
-
-        
-        const deleteDiv = document.createElement("div");
-        deleteDiv.className = "deleteIconDiv verticallyCentered";
-
-        const deleteButton = document.createElement("img");
-        deleteButton.src = "./images/delete.png";
-        deleteButton.className = "deleteIcon";
-        deleteButton.onclick = () => deleteReview(review);
-        deleteDiv.appendChild(deleteButton);
-        
-        scoreAndDeleteDiv.appendChild(reviewScore);
-        scoreAndDeleteDiv.appendChild(reviewStars);
-        scoreAndDeleteDiv.appendChild(reviewScoreNumber);
-        scoreAndDeleteDiv.appendChild(deleteDiv);
-
-        listItem.appendChild(reviewText);
-        listItem.appendChild(scoreAndDeleteDiv);
+        const listItem = createReviewLI(review);
         list.appendChild(listItem);
     });
     let newRating = calculateAvgRating(reviews);
     updateShowRating(newRating);
+}
+
+function createReviewLI(review) {
+    const listItem = document.createElement("li");
+    const reviewText = document.createElement("p");
+    reviewText.textContent = "Review:\n" + review.text;
+
+    const scoreAndDeleteDiv = document.createElement("div");
+    scoreAndDeleteDiv.className = "flexBetween";
+
+    const reviewScore = document.createElement("div");
+    reviewScore.textContent = "Score: ";
+    reviewScore.classList = "verticallyCentered reviewScore";
+
+    const reviewStars = document.createElement("div");
+    for (i = 0; i < 5; i++) {
+        const star = document.createElement("img");
+        star.className = "existingStar";
+        if (i < review.score) {
+            star.src = "./images/yellowStar.png";
+        } else {
+            star.src = "./images/greyStar.png";
+        }
+        reviewStars.appendChild(star);
+    }
+    reviewStars.className = "reviewStars";
+
+    const reviewScoreNumber = document.createElement("div");
+    reviewScoreNumber.textContent = "(" + review.score + "/5)";
+    reviewScoreNumber.classList = "verticallyCentered reviewScore";
+
+
+    const deleteDiv = document.createElement("div");
+    deleteDiv.className = "deleteIconDiv verticallyCentered";
+
+    const deleteButton = document.createElement("img");
+    deleteButton.src = "./images/delete.png";
+    deleteButton.className = "deleteIcon";
+    deleteButton.onclick = () => deleteReview(review);
+    deleteDiv.appendChild(deleteButton);
+
+    scoreAndDeleteDiv.appendChild(reviewScore);
+    scoreAndDeleteDiv.appendChild(reviewStars);
+    scoreAndDeleteDiv.appendChild(reviewScoreNumber);
+    scoreAndDeleteDiv.appendChild(deleteDiv);
+
+    listItem.appendChild(reviewText);
+    listItem.appendChild(scoreAndDeleteDiv);
+    return listItem;
 }
 
 function readReview(){
