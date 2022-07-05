@@ -40,6 +40,8 @@ function renderReviews(reviews){
         listItem.appendChild(scoreAndDeleteDiv);
         list.appendChild(listItem);
     });
+    let newRating = calculateAvgRating(reviews);
+    updateShowRating(newRating);
 }
 
 function readReview(){
@@ -86,6 +88,33 @@ function deleteReview(review){
     reviews.pop(reviews.indexOf(review));
     saveReviewsToStorage(reviews);
     renderReviews(reviews);
+}
+
+function calculateAvgRating(reviews){
+    let sum = 0;
+    for (let review of reviews){
+        sum += parseInt(review.score);
+    }
+    return sum/reviews.length;
+}
+
+function updateShowRating(newRating){
+    newRating = parseFloat(newRating).toFixed(1);
+    let ratingDiv = document.querySelector("#showRating");
+    let ratingSpan = document.createElement("span");
+    ratingSpan.id = "showRatingSpan";
+    
+    if(isNaN(newRating)){
+        ratingSpan.textContent = "No scores yet..."
+    } else{
+        ratingSpan.textContent = newRating + "/5";
+    }
+    let oldRating =  document.querySelector("#showRatingSpan");
+    if(oldRating){
+        ratingDiv.replaceChild(ratingSpan,oldRating);
+    } else{
+        ratingDiv.appendChild(ratingSpan);
+    }
 }
 
 renderReviews(reviews);
