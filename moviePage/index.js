@@ -1,3 +1,6 @@
+const yellowStarPath = "./images/yellowStar.png";
+const greyStarPath = "./images/greyStar.png";
+
 let storageReviews = JSON.parse(localStorage.getItem("reviews"));
 if(!storageReviews){
     storageReviews = [];
@@ -14,9 +17,9 @@ function starHover(starIndex){
     let newCounter = 1;
     for(let otherStar of reviewStarsField.children){
         if(newCounter > starIndex){
-            otherStar.src = "./images/greyStar.png"
+            otherStar.src = greyStarPath;
         } else{
-            otherStar.src = "./images/yellowStar.png"
+            otherStar.src = yellowStarPath;
         }
         newCounter++;
     }
@@ -26,10 +29,10 @@ function starLeave(){
     let starIndex = 1;
     for(let star of reviewStarsField.children){
         if(numberOfStars === 0 || starIndex > numberOfStars){
-            star.src = "./images/greyStar.png";
+            star.src = greyStarPath;
         }
         else{
-            star.src = "./images/yellowStar.png";
+            star.src = yellowStarPath;
         }
         starIndex++;
     }
@@ -51,7 +54,7 @@ function renderReviews(reviews){
         const listItem = createReviewLI(review);
         list.appendChild(listItem);
     });
-    let newRating = calculateAvgRating(reviews);
+    const newRating = calculateAvgRating(reviews);
     updateShowRating(newRating);
 }
 
@@ -68,13 +71,13 @@ function createReviewLI(review) {
     reviewScore.classList = "verticallyCentered reviewScore";
 
     const reviewStars = document.createElement("div");
-    for (i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
         const star = document.createElement("img");
         star.className = "existingStar";
         if (i < review.score) {
-            star.src = "./images/yellowStar.png";
+            star.src = yellowStarPath;
         } else {
-            star.src = "./images/greyStar.png";
+            star.src = greyStarPath;
         }
         reviewStars.appendChild(star);
     }
@@ -105,11 +108,11 @@ function createReviewLI(review) {
 }
 
 function readReview(){
-    let reviewText = reviewTextField.value;
-    let reviewScore = numberOfStars;
+    const text = reviewTextField.value;
+    const score = numberOfStars;
     return {
-        text: reviewText,
-        score: reviewScore
+        text,
+        score
     }
 }
 
@@ -121,7 +124,7 @@ function clearReviewFields(){
 
 const postButton = document.querySelector("#postButton");
 postButton.addEventListener('click', (event) =>{
-    let review = readReview();
+    const review = readReview();
     if(review.text === "" || review.score === 0){
         return
     }
@@ -136,7 +139,7 @@ function saveReviewsToStorage(reviews) {
 }
 
 function deleteReview(review){
-    let index = reviews.indexOf(review);
+    const index = reviews.indexOf(review);
     reviews.splice(index, 1);
     saveReviewsToStorage(reviews);
     renderReviews(reviews);
@@ -152,20 +155,21 @@ function calculateAvgRating(reviews){
 
 function updateShowRating(newRating){
     newRating = parseFloat(newRating).toFixed(1);
-    let ratingDiv = document.querySelector("#showRating");
-    let ratingSpan = document.createElement("span");
-    ratingSpan.id = "showRatingSpan";
+    const ratingDiv = document.querySelector("#showRating");
+    const ratingTextSpan = document.createElement("span");
+    ratingTextSpan.id = "showRatingSpan";
     
     if(isNaN(newRating)){
-        ratingSpan.textContent = "No scores yet..."
+        ratingTextSpan.textContent = "No scores yet..."
     } else{
-        ratingSpan.textContent = newRating + "/5";
+        ratingTextSpan.textContent = newRating + "/5";
     }
-    let oldRating =  document.querySelector("#showRatingSpan");
-    if(oldRating){
-        ratingDiv.replaceChild(ratingSpan,oldRating);
+
+    const oldRatingSpan =  document.querySelector("#showRatingSpan");
+    if(oldRatingSpan){
+        ratingDiv.replaceChild(ratingTextSpan,oldRatingSpan);
     } else{
-        ratingDiv.appendChild(ratingSpan);
+        ratingDiv.appendChild(ratingTextSpan);
     }
 }
 
