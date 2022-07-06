@@ -12,7 +12,7 @@ body {
     margin: auto;
 }
 
-.showCard, input[type="button"] {
+.showCard, input[type="button"], .ratingEntry {
     background-color: white;
     color: blueviolet;
     display: inline-block;
@@ -77,4 +77,61 @@ li{
     padding: 20px;
     max-width: 100%;
     margin-top: 20px;
+}
+
+.deleteIconDiv {
+    max-width: 7%;
+    cursor: pointer;
+}
+
+.deleteIcon {
+    max-width: 100%;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+
+.ratingEntry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+} 
+
+#stars {
+    display: flex;
+    justify-content: space-evenly;
+}
+.starAdd {
+    max-width: 15%;
+}
+.existingStar{
+    max-width: 20%;
+}
+
+#addRating{
+    min-width: 35%;
+    text-align: center;
+}
+
+.verticallyCentered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Može li nekako sretnije? */
+}
+
+.reviewScore {
+    min-width: 10%;
+    text-align: left;
+}
+
+.reviewStars {
+    max-width: 40%;
+}
+
+#postButton{
+    cursor: pointer;
 }
