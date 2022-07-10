@@ -1,4 +1,5 @@
-class Show {
+import { IShow } from './show.interface';
+export class Show {
 	public title: string;
 	public description: string;
 	public average_rating: number | null;

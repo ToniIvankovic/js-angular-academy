@@ -1,4 +1,4 @@
-interface IShow {
+export interface IShow {
 	title: string;
 	description: string;
 	average_rating: number | null;
