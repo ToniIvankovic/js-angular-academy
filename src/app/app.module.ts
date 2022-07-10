@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShowsContainerComponentModule } from './shows-container-component/shows-container/shows-container-component.module';
+import { ShowsContainerComponentModule } from './components/shows-container/shows-container-component.module';
 
 @NgModule({
 	declarations: [AppComponent],
