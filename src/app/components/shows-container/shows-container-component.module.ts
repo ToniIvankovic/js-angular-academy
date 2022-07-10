@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShowsContainerComponent } from './shows-container/shows-container.component';
+import { ShowsContainerComponent } from './shows-container.component';
 
 @NgModule({
 	declarations: [ShowsContainerComponent],
