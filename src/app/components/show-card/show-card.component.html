@@ -1,5 +1,5 @@
 <mat-card>
 	<mat-card-title>{{ title }}</mat-card-title>
-	<img mat-card-image src="{{ imageUrl }}" />
+	<img mat-card-image src="{{ imageUrl }}" (error)="onImgError($event)" />
 	<mat-card-subtitle>Average rating: {{ averageRating }}</mat-card-subtitle>
 </mat-card>
