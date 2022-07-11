@@ -1,8 +1,16 @@
 mat-card {
     border-radius: 15px;
     max-width: max-content;
+    width: max-content;
     max-height: 100%;
-    margin:30px; //Ne radi sa 10%...
+    //margin:10%; //Ne radi sa 10%...
+    box-sizing: border-box;
+}
+:host{
+    margin-right: 10%;
+    display: block;
+    box-sizing: border-box;
+    width: 300px;
 }
 img {
     width: 300px;

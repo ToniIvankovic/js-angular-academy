@@ -10,13 +10,10 @@ export class ShowCardComponent implements OnInit {
 	@Input() public averageRating: number | null | string = null;
 	@Input() public imageUrl: string | null = '';
 
-	public onImgError(event: any) {
-		//kako umjesto any predati event koji ima i src
-		let altUrl = `https://via.placeholder.com/300x240/e6b800/3b3b3b?text=${this.title}`;
-		// console.log(event)
-		this.imageUrl = altUrl;
-		event.src = altUrl;
+	public get placeholderURL() {
+		return `https://via.placeholder.com/300x240/e6b800/3b3b3b?text=${this.title}`;
 	}
+
 	ngOnInit() {
 		if (!this.averageRating) {
 			this.averageRating = 'No ratings';

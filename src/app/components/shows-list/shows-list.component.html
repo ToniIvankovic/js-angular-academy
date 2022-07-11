@@ -1,9 +1,8 @@
 <div class="flexbox">
-	<div *ngFor="let show of shows">
-		<app-show-card
-			[title]="show.title"
-			[averageRating]="show.average_rating"
-			[imageUrl]="show.image_url"
-		></app-show-card>
-	</div>
+	<app-show-card
+		*ngFor="let show of shows"
+		[title]="show.title"
+		[averageRating]="show.averageRating"
+		[imageUrl]="show.imageUrl"
+	></app-show-card>
 </div>
