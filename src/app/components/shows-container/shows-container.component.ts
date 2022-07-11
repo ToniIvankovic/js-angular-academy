@@ -48,7 +48,7 @@ export class ShowsContainerComponent {
 		}),
 		new Show({
 			title: 'Arcane',
-			average_rating: 4.5,
+			average_rating: null,
 			image_url:
 				//'https://s3-eu-central-1.amazonaws.com/www-staging.esports.com/WP%20Media%20Folder%20-%20esports-com/app/uploads/2021/09/More-Riot-Games-Arcane-content-shown.jpg',
 				'',

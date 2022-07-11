@@ -5,9 +5,9 @@ import { Component, Input, OnInit } from '@angular/core';
 	templateUrl: './show-card.component.html',
 	styleUrls: ['./show-card.component.scss'],
 })
-export class ShowCardComponent {
+export class ShowCardComponent implements OnInit {
 	@Input() public title: string = '';
-	@Input() public averageRating: number | null = null;
+	@Input() public averageRating: number | null | string = null;
 	@Input() public imageUrl: string | null = '';
 
 	public onImgError(event: any) {
@@ -16,5 +16,10 @@ export class ShowCardComponent {
 		// console.log(event)
 		this.imageUrl = altUrl;
 		event.src = altUrl;
+	}
+	ngOnInit() {
+		if (!this.averageRating) {
+			this.averageRating = 'No ratings';
+		}
 	}
 }
