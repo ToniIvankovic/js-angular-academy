@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -8,11 +8,8 @@ import { ShowService } from 'src/app/services/show/show.service';
 	styleUrls: ['./shows-container.component.scss'],
 })
 export class ShowsContainerComponent {
+	@Input() public shows: Array<Show> = [];
 	constructor(private readonly showService: ShowService) {}
-
-	public get shows() {
-		return this.showService.fetchAllShows();
-	}
 
 	public onShowAdd(show: Show) {
 		this.showService.addNewShow(show);
