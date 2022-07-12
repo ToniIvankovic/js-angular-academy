@@ -5,11 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShowsContainerComponentModule } from './components/shows-container/shows-container-component.module';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ShowsContainerComponentModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		ShowsContainerComponentModule,
+		MainLayoutModule,
+	],
 	providers: [],
 	bootstrap: [AppComponent],
 })
