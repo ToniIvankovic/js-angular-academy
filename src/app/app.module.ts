@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShowsContainerComponentModule } from './components/shows-container/shows-container-component.module';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 @NgModule({
 	declarations: [AppComponent],
