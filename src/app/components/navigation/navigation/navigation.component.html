@@ -1,0 +1,23 @@
+<nav class="bgnd-secondary">
+	<div class="menus">
+		<div
+			class="menu"
+			*ngFor="let menu of menus"
+			[style.width.%]="99 / menus.length"
+			[routerLink]="menu.url"
+			[routerLinkActive]="'active'"
+			[routerLinkActiveOptions]="{ exact: true }"
+		>
+			{{ menu.title }}
+		</div>
+	</div>
+	<div class="finder">
+		<div class="right">
+			<mat-form-field>
+				<mat-label>Find by id:</mat-label>
+				<input matInput [(ngModel)]="id" name="id" />
+			</mat-form-field>
+			<button mat-raised-button color="btn" type="submit" [routerLink]="'/show/' + id">Find</button>
+		</div>
+	</div>
+</nav>

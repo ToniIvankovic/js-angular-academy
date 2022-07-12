@@ -1,0 +1,40 @@
+.bgnd-secondary{
+    background-color: #E4C484;
+}
+.menus{
+    display: inline-block;
+    width: 70%;
+    height: 100%;
+}
+.menu{
+    display: inline-block;
+    min-width: 200px;
+    min-height: 100%;
+    padding: 1em 0;
+    font-size: x-large;
+    text-align: center;
+    border: 1px solid dimgrey;
+    border-left: none;
+}
+.finder{
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+}
+.right{
+    margin: 0 1em;
+    box-sizing: border-box;
+    justify-self: flex-end;
+    text-align: right;
+}
+mat-form-field{
+    margin: 0 1em;
+}
+
+.active{
+    background-color: rgb(192, 146, 29);
+}
+.mat-btn{
+    background-color: blueviolet;
+    color: white;
+}

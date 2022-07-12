@@ -19,14 +19,17 @@ export class ShowDetailsComponent {
 
 	//Kakoc se ne bi svaki put morao ponovno tražiti id
 	private _show: Show | null;
+	private forceReload: boolean = false;
+	private id: number = 0;
 
 	private findShow(): Show | null {
-		const id = this.route?.snapshot.params['id'];
-		return this.showService.fetchById(id);
+		return this.showService.fetchById(this.id);
 	}
 
 	private get show(): Show {
-		if (!this._show) {
+		const id = this.route?.snapshot.params['id'];
+		if (!this._show || id != this.id) {
+			this.id = id;
 			this._show = this.findShow();
 		}
 		if (!this._show) {
@@ -43,8 +46,16 @@ export class ShowDetailsComponent {
 		return this._show;
 	}
 
-	public title: string = this.show.title;
-	public avgRating: number | null = this.show.averageRating;
-	public description: string = this.show.description;
-	public imgUrl: string | null = this.show.imageUrl;
+	public get title(): string {
+		return this.show.title;
+	}
+	public get avgRating(): number | null {
+		return this.show.averageRating;
+	}
+	public get description(): string {
+		return this.show.description;
+	}
+	public get imgUrl(): string | null {
+		return this.show.imageUrl;
+	}
 }
