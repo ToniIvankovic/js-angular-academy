@@ -86,8 +86,12 @@ export class ShowService {
 		return this.fetchAboveRating(4);
 	}
 
-	public fetchById(id: number): Show | undefined {
+	public fetchById(id: number): Show | null {
 		const foundShow = this.shows.find((show) => show.uuid == id);
+		if (!foundShow) {
+			return null;
+			// throw new Error(`No show with id ${id}`);
+		}
 		return foundShow;
 	}
 
