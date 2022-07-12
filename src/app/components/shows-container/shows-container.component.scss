@@ -1,0 +1,15 @@
+// Kako dodati pozadinu nekoj komponenti iz scss datoteke te komponente, umjesto iz glavnog stylea?
+:host{
+	background-color: darkorchid;
+    display: inline-block;
+}
+
+.centeredComponent{
+    justify-content: center;
+    width: 30%;
+    min-width: 300px;
+    margin: auto;
+}
+app-show-form {
+    width: 50%;    //Zašto ovo ne radi
+}
