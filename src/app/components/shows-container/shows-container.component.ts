@@ -31,7 +31,7 @@ export class ShowsContainerComponent {
 		{
 			title: 'Élite',
 			average_rating: 3.7,
-			image_url: 'https://mixer.hr/wp-content/uploads/2022/04/ELite-mixer.hr_.jpg',
+			image_url: 'https://ntvb.tmsimg.com/assets/p15991777_b_h8_ae.jpg?w=960&h=540',
 			description: 'TODO',
 		},
 		{
@@ -50,8 +50,8 @@ export class ShowsContainerComponent {
 			title: 'Arcane',
 			average_rating: null,
 			image_url:
-				//'https://s3-eu-central-1.amazonaws.com/www-staging.esports.com/WP%20Media%20Folder%20-%20esports-com/app/uploads/2021/09/More-Riot-Games-Arcane-content-shown.jpg',
-				'',
+				'https://s3-eu-central-1.amazonaws.com/www-staging.esports.com/WP%20Media%20Folder%20-%20esports-com/app/uploads/2021/09/More-Riot-Games-Arcane-content-shown.jpg',
+			//'',
 			description: 'TODO',
 		},
 	].map((i) => new Show(i));

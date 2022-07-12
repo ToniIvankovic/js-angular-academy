@@ -5,18 +5,12 @@ import { Component, Input, OnInit } from '@angular/core';
 	templateUrl: './show-card.component.html',
 	styleUrls: ['./show-card.component.scss'],
 })
-export class ShowCardComponent implements OnInit {
+export class ShowCardComponent {
 	@Input() public title: string = '';
-	@Input() public averageRating: number | null | string = null;
+	@Input() public averageRating: number | null = null;
 	@Input() public imageUrl: string | null = '';
 
 	public get placeholderURL() {
 		return `https://via.placeholder.com/300x240/e4c484/3b3b3b?text=${this.title}`;
-	}
-
-	ngOnInit() {
-		if (!this.averageRating) {
-			this.averageRating = 'No ratings';
-		}
 	}
 }
