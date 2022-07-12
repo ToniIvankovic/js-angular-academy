@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShowsContainerComponent } from './components/shows-container/shows-container.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AllShowsComponent } from './pages/all-shows/all-shows.component';
+import { ShowDetailsComponent } from './pages/show-details/show-details.component';
+import { TopRatedShowsComponent } from './pages/top-rated-shows/top-rated-shows.component';
 
 const routes: Routes = [
 	{
@@ -10,7 +12,15 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				component: ShowsContainerComponent,
+				component: AllShowsComponent,
+			},
+			{
+				path: 'top-rated',
+				component: TopRatedShowsComponent,
+			},
+			{
+				path: 'show/:id',
+				component: ShowDetailsComponent,
 			},
 		],
 	},
