@@ -11,7 +11,7 @@ export class ShowCardComponent implements OnInit {
 	@Input() public imageUrl: string | null = '';
 
 	public get placeholderURL() {
-		return `https://via.placeholder.com/300x240/e6b800/3b3b3b?text=${this.title}`;
+		return `https://via.placeholder.com/300x240/e4c484/3b3b3b?text=${this.title}`;
 	}
 
 	ngOnInit() {

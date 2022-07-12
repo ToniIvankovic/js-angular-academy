@@ -11,7 +11,7 @@ export class ShowsContainerComponent {
 		{
 			title: 'Heartstopper',
 			average_rating: 4.4,
-			image_url: '../../../assets/heartstopper.jpg',
+			image_url: 'https://u2k3a4x7.stackpathcdn.com/wp-content/uploads/2022/05/heartstopper.jpg',
 			description: 'TODO',
 		},
 		{

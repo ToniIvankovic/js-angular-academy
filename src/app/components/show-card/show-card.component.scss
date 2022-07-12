@@ -1,4 +1,6 @@
 mat-card {
+    color: blueviolet;
+    text-align: center;
     border-radius: 15px;
     max-width: max-content;
     width: max-content;
@@ -6,8 +8,11 @@ mat-card {
     //margin:10%; //Ne radi sa 10%...
     box-sizing: border-box;
 }
+mat-card-title{
+    padding: 0.25em 0;
+}
 :host{
-    margin-right: 10%;
+    margin: 1em 5% 1em 5%;
     display: block;
     box-sizing: border-box;
     width: 300px;

@@ -20,9 +20,6 @@ export class ShowFormComponent implements OnInit {
 	}
 
 	public onSubmit() {
-		console.log(this.showName);
-		console.log(this.imgURL);
-		console.log(this.description);
 		let newShow = new Show({
 			title: this.showName,
 			description: this.description,
@@ -30,5 +27,8 @@ export class ShowFormComponent implements OnInit {
 			image_url: this.imgURL,
 		});
 		this.add.emit(newShow);
+		this.showName = '';
+		this.description = '';
+		this.imgURL = '';
 	}
 }
