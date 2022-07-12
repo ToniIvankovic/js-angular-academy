@@ -1,4 +1,5 @@
 export interface IShow {
+	uuid: number;
 	title: string;
 	description: string;
 	average_rating: number | null;
