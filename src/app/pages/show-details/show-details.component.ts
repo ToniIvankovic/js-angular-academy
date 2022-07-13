@@ -14,48 +14,36 @@ export class ShowDetailsComponent {
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 	) {
-		this._show = this.findShow();
+		this.findIdAndShow();
 	}
 
 	//Kakoc se ne bi svaki put morao ponovno tražiti id
-	private _show: Show | null;
-	private forceReload: boolean = false;
+	private _show: Show | null = null;
 	private id: number = 0;
 
-	private findShow(): Show | null {
-		return this.showService.fetchById(this.id);
+	private findIdAndShow() {
+		this.id = this.route?.snapshot.params['id'];
+		this._show = this.showService.fetchById(this.id);
 	}
 
-	private get show(): Show {
-		const id = this.route?.snapshot.params['id'];
-		if (!this._show || id != this.id) {
-			this.id = id;
-			this._show = this.findShow();
-		}
+	public get show(): Show | null {
+		this.findIdAndShow();
 		if (!this._show) {
 			this.router.navigateByUrl('/');
-			//Ne mogu zakomentirati ovo dalje jer će se buniti oko return typea
-			return new Show({
-				uuid: 0,
-				average_rating: 5,
-				title: 'No show with such id',
-				description: 'No',
-				image_url: '',
-			});
 		}
 		return this._show;
 	}
 
 	public get title(): string {
-		return this.show.title;
+		return this.show?.title || '';
 	}
 	public get avgRating(): number | null {
-		return this.show.averageRating;
+		return this.show?.averageRating || null;
 	}
 	public get description(): string {
-		return this.show.description;
+		return this.show?.description || '';
 	}
 	public get imgUrl(): string | null {
-		return this.show.imageUrl;
+		return this.show?.imageUrl || null;
 	}
 }

@@ -66,7 +66,9 @@ export class ShowService {
 		},
 	].map((i) => new Show(i));
 
-	constructor() {}
+	constructor() {
+		console.log('Created service singleton');
+	}
 
 	public get nextId(): number {
 		let maxId = 0;
