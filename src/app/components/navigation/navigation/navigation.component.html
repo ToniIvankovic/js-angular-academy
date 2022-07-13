@@ -1,6 +1,6 @@
 <nav class="bgnd-secondary">
 	<div class="menus">
-		<div
+		<a
 			class="menu"
 			*ngFor="let menu of menus"
 			[style.width.%]="99 / menus.length"
@@ -9,7 +9,7 @@
 			[routerLinkActiveOptions]="{ exact: true }"
 		>
 			{{ menu.title }}
-		</div>
+		</a>
 	</div>
 	<div class="finder">
 		<div class="right">
