@@ -8,7 +8,7 @@ import { ShowService } from 'src/app/services/show/show.service';
 	templateUrl: './show-form.component.html',
 	styleUrls: ['./show-form.component.scss'],
 })
-export class ShowFormComponent implements OnInit {
+export class ShowFormComponent {
 	@Output() add = new EventEmitter<Show>();
 	public showName: string = '';
 	public description: string = '';
@@ -16,12 +16,8 @@ export class ShowFormComponent implements OnInit {
 
 	constructor(private readonly showService: ShowService) {}
 
-	ngOnInit(): void {
-		return;
-	}
-
 	public onSubmit() {
-		let newShow = new Show({
+		const newShow = new Show({
 			uuid: this.showService.nextId,
 			title: this.showName,
 			description: this.description,
