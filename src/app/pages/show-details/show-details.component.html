@@ -1,0 +1,42 @@
+<div class="bgnd">
+	<div class="app">
+		<ng-container *ngIf="show">
+			<div class="showCard">
+				<div class="showImage">
+					<img src="{{ imgUrl }}" />
+				</div>
+				<div class="showData">
+					<div class="showTitle">{{ title }}</div>
+					<div class="showDescription">
+						{{ description }}
+					</div>
+					<br />
+					<div class="showDescription" id="showRating">
+						<span>Average rating: <app-rating [avgRating]="avgRating"></app-rating></span>
+					</div>
+				</div>
+			</div>
+			<!--
+                <h2>Reviews</h2>
+                <div class="reviewsSection">
+                    <textarea id="reviewText" type="text" placeholder="Add review" rows="3"></textarea>
+                    <div class="ratingEntry">
+                        <span class="verticallyCentered" id="addRating">
+                            Add a rating:
+                        </span>
+                        <div id="stars">
+                            <img id="star1" onmouseover="starHover(1)" onmouseleave="starLeave()" onclick="starClick(1)" class="starAdd" src="../../../assets/greyStar.png">
+                            <img id="star2" onmouseover="starHover(2)" onmouseleave="starLeave()" onclick="starClick(2)" class="starAdd" src="../../../assets/greyStar.png">
+                            <img id="star3" onmouseover="starHover(3)" onmouseleave="starLeave()" onclick="starClick(3)" class="starAdd" src="../../../assets/greyStar.png">
+                            <img id="star4" onmouseover="starHover(4)" onmouseleave="starLeave()" onclick="starClick(4)" class="starAdd" src="../../../assets/greyStar.png">
+                            <img id="star5" onmouseover="starHover(5)" onmouseleave="starLeave()" onclick="starClick(5)" class="starAdd" src="../../../assets/greyStar.png">
+                        </div>
+                    </div>
+                    <input id="postButton" type="button" value="Post">
+                    <ul class="reviewsList">
+                    </ul>    
+                </div>
+            -->
+		</ng-container>
+	</div>
+</div>

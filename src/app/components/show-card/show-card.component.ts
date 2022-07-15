@@ -13,4 +13,12 @@ export class ShowCardComponent {
 	public get placeholderURL() {
 		return `https://via.placeholder.com/300x240/e4c484/3b3b3b?text=${this.title}`;
 	}
+
+	public switchLink(event: any) {
+		if (!event.target) {
+			return;
+		} else {
+			event.target['src'] = this.placeholderURL;
+		}
+	}
 }
