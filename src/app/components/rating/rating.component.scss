@@ -1,0 +1,29 @@
+.stars{
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    height: 20px;
+    margin: 0 0.5em;
+}
+.yellowStars{
+    height: 100%;
+    background-image: url("../../../assets/yellowStar.png");
+    background-size: 20px;
+    background-repeat: repeat-x;
+}
+.greyStars{
+    height: 100%;
+    width: 100px;
+    background-image: url("../../../assets/greyStar.png");
+    background-size: 20px;
+    background-repeat: repeat-x;
+}
+
+.ratingNum{
+    display: inline-block;
+}
+.container{
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}

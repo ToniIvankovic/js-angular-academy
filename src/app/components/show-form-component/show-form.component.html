@@ -1,0 +1,19 @@
+<mat-card>
+	<form (ngSubmit)="onSubmit()">
+		<mat-form-field>
+			<mat-label>Show name</mat-label>
+			<input [(ngModel)]="showName" name="showName" matInput type="text" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Image URL</mat-label>
+			<input [(ngModel)]="imgURL" name="imgURL" matInput type="url" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Description</mat-label>
+			<textarea [(ngModel)]="description" name="description" matInput type="text" rows="4"></textarea>
+		</mat-form-field>
+		<div class="centeredComponent">
+			<button mat-raised-button type="submit" color="primary">Add show</button>
+		</div>
+	</form>
+</mat-card>
