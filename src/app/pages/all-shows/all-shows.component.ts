@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { observable } from 'rxjs';
+import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 @Component({
@@ -7,9 +9,10 @@ import { ShowService } from 'src/app/services/show/show.service';
 	styleUrls: ['./all-shows.component.scss'],
 })
 export class AllShowsComponent {
-	constructor(private readonly showService: ShowService) {}
-
-	public get shows() {
-		return this.showService.fetchAllShows();
+	public shows: Show[] = [];
+	constructor(private readonly showService: ShowService) {
+		showService.fetchAllShows().forEach((observable) => {
+			observable.subscribe((value) => this.shows.push(value));
+		});
 	}
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { delay, MonoTypeOperatorFunction, observable, Observable, of, OperatorFunction } from 'rxjs';
 import { Show } from './show.model';
 
 @Injectable({
@@ -82,25 +83,31 @@ export class ShowService {
 		return maxId + 1;
 	}
 
-	public fetchAllShows(): Array<Show> {
-		return this.shows;
+	private get delayPipe(): MonoTypeOperatorFunction<any> {
+		return delay(Math.random() * 2000 + 500);
 	}
 
-	private fetchAboveRating(rating: number): Array<Show> {
-		return this.shows.filter((show) => (show.averageRating || 0) > rating);
+	public fetchAllShows(): Array<Observable<Show>> {
+		return this.shows.map((show) => of(show).pipe(this.delayPipe));
 	}
 
-	public fetchTopRated(): Array<Show> {
-		return this.fetchAboveRating(4);
+	private fetchAboveRating(rating: number): Array<Observable<Show>> {
+		return this.shows
+			.filter((show) => (show.averageRating || 0) > rating)
+			.map((show) => of(show).pipe(this.delayPipe));
 	}
 
-	public fetchById(id: number): Show | null {
+	public fetchTopRated(): Array<Observable<Show>> {
+		return this.fetchAboveRating(4).map((observable) => observable.pipe(this.delayPipe));
+	}
+
+	public fetchById(id: number): Observable<Show | null> {
 		const foundShow = this.shows.find((show) => show.uuid == id);
 		if (!foundShow) {
-			return null;
+			return of(null).pipe(this.delayPipe);
 			// throw new Error(`No show with id ${id}`);
 		}
-		return foundShow;
+		return of(foundShow).pipe(this.delayPipe);
 	}
 
 	public addNewShow(show: Show): void {

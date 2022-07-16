@@ -28,8 +28,14 @@ export class ShowDetailsComponent implements OnInit {
 			.subscribe((event) => {
 				if (event instanceof ActivationEnd && event.snapshot.component?.name == ShowDetailsComponent.name) {
 					this.id = event.snapshot.params['id'];
-					this._show = this.showService.fetchById(this.id);
-					this.findReviewsForShow(this.id);
+					this.showService.fetchById(this.id).subscribe((value) => {
+						console.log(value);
+						if (!value) {
+							this.router.navigateByUrl('/');
+						}
+						this._show = value;
+						this.findReviewsForShow(this.id);
+					});
 				}
 			});
 	}
@@ -63,10 +69,6 @@ export class ShowDetailsComponent implements OnInit {
 	public id: number = 0;
 
 	public get show(): Show | null {
-		// this.findIdAndShow();
-		if (!this._show) {
-			this.router.navigateByUrl('/');
-		}
 		return this._show;
 	}
 
