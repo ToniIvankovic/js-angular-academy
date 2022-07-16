@@ -5,7 +5,7 @@
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     // height: 100%;
-    min-height: max-content; //Bez paddinga ne radi dobro s developer toolsima - kako napraviti height=max(100%, max-content)?
+    min-height: 100%; //Bez paddinga ne radi dobro s developer toolsima - kako napraviti height=max(100%, max-content)?
     width: 100%;
     padding: 3em 0 7em 0;
 }
