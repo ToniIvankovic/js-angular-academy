@@ -23,28 +23,15 @@
 .showImage img{
     max-height: 400px;
     object-fit: cover;
-}
-
-.showCard, input[type="button"], .ratingEntry {
-    background-color: white;
-    color: blueviolet;
-    display: inline-block;
-    border-radius: 15px;
-}
-
-.showImage img{
     width: 100%;
     border-radius: 15px 15px 0px 0px;
 }
 
-h1 {
-    font-size: x-large;
-    font-weight: 700;
-}
-
-input[type="button"] {
-    font-size: large;
-    font-weight: 500;
+.showCard {
+    background-color: white;
+    color: blueviolet;
+    display: inline-block;
+    border-radius: 15px;
 }
 
 .showTitle {
@@ -58,93 +45,4 @@ input[type="button"] {
 
 .showData {
     padding: 15px;
-}
-
-textarea {
-    resize: none;
-    font-family: inherit;
-}
-
-.reviewsSection {
-    display: flex;
-    flex-direction: column;
-}
-
-input, textarea {
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    padding: 10px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-li{
-    background-color: rgb(228, 196, 132);
-    color: black;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 100%;
-    margin-top: 20px;
-}
-
-.deleteIconDiv {
-    max-width: 7%;
-    cursor: pointer;
-}
-
-.deleteIcon {
-    max-width: 100%;
-}
-
-.flexBetween {
-    display: flex;
-    justify-content: space-between;
-    margin: 1em 0;
-}
-
-.ratingEntry {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 15px;
-} 
-
-#stars {
-    display: flex;
-    justify-content: space-evenly;
-}
-.starAdd {
-    max-width: 15%;
-}
-.existingStar{
-    max-width: 20%;
-}
-
-#addRating{
-    min-width: 35%;
-    text-align: center;
-}
-
-.verticallyCentered {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Može li nekako sretnije? */
-}
-
-.reviewScore {
-    min-width: 10%;
-    text-align: left;
-}
-
-.reviewStars {
-    max-width: 40%;
-}
-
-#postButton{
-    cursor: pointer;
 }

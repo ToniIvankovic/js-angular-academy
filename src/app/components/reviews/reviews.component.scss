@@ -1,62 +1,17 @@
-.bgnd {
-    background-color: rgb(155, 79, 230);
-    background-size: 20%;
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    height: 100%;
-    width: 100%;
-    padding-top: 3em;
-}
-
-
-.app {
-    max-width: 600px;
-    min-width: 400px;
-    margin: auto;
-}
-
-.showCard{
-    width: 100%;
-}
-
-.showImage img{
+img{
     max-height: 400px;
     object-fit: cover;
-}
-
-.showCard, input[type="button"], .ratingEntry {
-    background-color: white;
-    color: blueviolet;
-    display: inline-block;
-    border-radius: 15px;
-}
-
-.showImage img{
     width: 100%;
     border-radius: 15px 15px 0px 0px;
 }
 
-h1 {
-    font-size: x-large;
-    font-weight: 700;
-}
-
-input[type="button"] {
+input[type="button"], .ratingEntry {
+    background-color: white;
+    color: blueviolet;
+    display: inline-block;
+    border-radius: 15px;
     font-size: large;
     font-weight: 500;
-}
-
-.showTitle {
-    font-size: large;
-    font-weight: 700;
-}
-
-.showDescription {
-    font-size: small;
-}
-
-.showData {
-    padding: 15px;
 }
 
 textarea {
@@ -132,7 +87,7 @@ li{
 .verticallyCentered {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Može li nekako sretnije? */
+    justify-content: center;
 }
 
 .reviewScore {
