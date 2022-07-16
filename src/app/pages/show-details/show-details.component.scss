@@ -1,5 +1,6 @@
+@use "../../variables.scss" as variables;
 .bgnd {
-    background-color: rgb(155, 79, 230);
+    background-color: variables.$primary_color;
     background-size: 20%;
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -29,7 +30,7 @@
 
 .showCard {
     background-color: white;
-    color: blueviolet;
+    color: variables.$secondary_color;
     display: inline-block;
     border-radius: 15px;
 }

@@ -1,6 +1,7 @@
+@use "../../variables.scss" as variables;
 // Kako dodati pozadinu nekoj komponenti iz scss datoteke te komponente, umjesto iz glavnog stylea?
 :host{
-	background-color: rgb(155, 79, 230);
+	background-color: variables.$primary_color;
     display: inline-block;
 }
 

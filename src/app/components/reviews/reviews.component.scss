@@ -1,3 +1,5 @@
+@use "../../variables.scss" as variables;
+
 img{
     max-height: 400px;
     object-fit: cover;
@@ -7,7 +9,7 @@ img{
 
 input[type="button"], .ratingEntry {
     background-color: white;
-    color: blueviolet;
+    color: variables.$secondary_color;
     display: inline-block;
     border-radius: 15px;
     font-size: large;
@@ -38,8 +40,8 @@ ul {
 }
 
 li{
-    background-color: rgb(228, 196, 132);
-    color: black;
+    background-color: variables.$secondary_color_accent;
+    color: white;
     border-radius: 15px;
     padding: 20px;
     max-width: 100%;

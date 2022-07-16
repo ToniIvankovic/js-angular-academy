@@ -1,9 +1,12 @@
+@use "../../../variables.scss" as variables;
 a{
     text-decoration: none;
     color: unset;
 }
 .bgnd-secondary{
-    background-color: #E4C484;
+    background-color: variables.$secondary_color;
+    color: white;
+    font-weight: 500;
 }
 .menus{
     display: inline-block;
@@ -17,7 +20,7 @@ a{
     padding: 1em 0;
     font-size: x-large;
     text-align: center;
-    border: 1px solid dimgrey;
+    border: 1px solid black;
     border-left: none;
     cursor: pointer;
 }
@@ -37,9 +40,17 @@ mat-form-field{
 }
 
 .active{
-    background-color: rgb(192, 146, 29);
+    background-color: variables.$secondary_color_accent;
+    color: white;
 }
 .mat-btn{
-    background-color: blueviolet;
-    color: white;
+    background-color: variables.$primary_color;
+    color: black;
+}
+mat-form-field{
+    max-width: 50%;
+}
+
+input, mat-label{
+    color: variables.$primary_color;
 }
