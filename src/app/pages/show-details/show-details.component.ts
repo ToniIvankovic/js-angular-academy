@@ -1,33 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
+import { filter, timer } from 'rxjs';
+import { Review } from 'src/app/services/review/review.model';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+
+const STORAGE_KEY = 'reviews';
 
 @Component({
 	selector: 'app-show-details',
 	templateUrl: './show-details.component.html',
 	styleUrls: ['./show-details.component.scss'],
 })
-export class ShowDetailsComponent {
+export class ShowDetailsComponent implements OnInit {
+	public reviews: Array<Review> = [];
+	private allReviews: Array<Review> = [];
+
 	constructor(
 		private readonly showService: ShowService,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 	) {
-		this.findIdAndShow();
+		this.router.events
+			// .pipe(filter((event: Event) => {
+			// 	return event instanceof NavigationEnd;
+			// }))
+			.subscribe((event) => {
+				if (event instanceof ActivationEnd && event.snapshot.component?.name == ShowDetailsComponent.name) {
+					this.id = event.snapshot.params['id'];
+					this._show = this.showService.fetchById(this.id);
+					this.findReviewsForShow(this.id);
+				}
+			});
 	}
 
-	//Kakoc se ne bi svaki put morao ponovno tražiti id
+	ngOnInit(): void {
+		this.allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+		this.findReviewsForShow(this.id);
+	}
+
+	private findReviewsForShow(id: number): void {
+		this.reviews = this.allReviews.filter((review) => review.showid === id);
+	}
+
+	public storeNewReview(review: Review): void {
+		this.reviews.push(review);
+		this.allReviews.push(review);
+		this.saveToLocalStorage(this.allReviews);
+	}
+
+	private saveToLocalStorage(reviews: Review[]): void {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+	}
+
 	private _show: Show | null = null;
-	private id: number = 0;
-
-	private findIdAndShow() {
-		this.id = this.route?.snapshot.params['id'];
-		this._show = this.showService.fetchById(this.id);
-	}
+	public id: number = 0;
 
 	public get show(): Show | null {
-		this.findIdAndShow();
+		// this.findIdAndShow();
 		if (!this._show) {
 			this.router.navigateByUrl('/');
 		}

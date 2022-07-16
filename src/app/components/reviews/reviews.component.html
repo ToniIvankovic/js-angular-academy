@@ -1,6 +1,13 @@
 <h2>Reviews</h2>
 <div class="reviewsSection">
-	<textarea id="reviewText" type="text" placeholder="Add review" rows="3"></textarea>
+	<textarea
+		id="reviewText"
+		name="reviewText"
+		type="text"
+		placeholder="Add review"
+		rows="3"
+		[(ngModel)]="reviewText"
+	></textarea>
 	<div class="ratingEntry">
 		<span class="verticallyCentered" id="addRating"> Add a rating: </span>
 		<div id="stars">
@@ -15,8 +22,10 @@
 			/>
 		</div>
 	</div>
-	<input id="postButton" type="button" value="Post" />
+	<input id="postButton" type="button" value="Post" (click)="onButtonClick($event)" />
 	<ul class="reviewsList" *ngIf="reviews.length !== 0">
-		<li>aa</li>
+		<li *ngFor="let review of reviews">
+			<app-single-review [review]="review"></app-single-review>
+		</li>
 	</ul>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { timer } from 'rxjs';
 import { Review } from 'src/app/services/review/review.model';
 
 @Component({
@@ -11,12 +12,33 @@ export class ReviewsComponent implements OnInit {
 	public readonly yellowStarPath = '../../../assets/yellowStar.png';
 	public numberOfStars = 0;
 	private reviewStarsField: HTMLElement | null = null;
-	public reviews: Array<Review> = [];
+	public reviewText: string = '';
+
+	@Input() reviews: Array<Review> = [];
+	@Input() showId: number = 0;
+	@Output() newReview = new EventEmitter<Review>();
 
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
 	}
 
+	public onButtonClick(event: Event) {
+		const newReview = new Review({
+			comment: this.reviewText,
+			rating: this.numberOfStars,
+			showId: this.showId,
+			uuid: this.generateNextId(),
+		});
+		this.newReview.emit(newReview);
+
+		this.reviewText = '';
+		this.numberOfStars = 0;
+		this.starLeave();
+	}
+
+	private generateNextId(): number {
+		return (this.reviews[this.reviews.length - 1]?.uuid || 0) + 1;
+	}
 	public starHover(starIndex: number): void {
 		if (!this.reviewStarsField) {
 			return;

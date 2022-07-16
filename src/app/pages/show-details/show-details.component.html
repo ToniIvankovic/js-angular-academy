@@ -16,7 +16,7 @@
 					</div>
 				</div>
 			</div>
-			<app-reviews></app-reviews>
+			<app-reviews [reviews]="reviews" (newReview)="storeNewReview($event)" [showId]="id"></app-reviews>
 		</ng-container>
 	</div>
 </div>
