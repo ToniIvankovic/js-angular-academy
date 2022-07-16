@@ -17,9 +17,14 @@ export class ReviewsComponent implements OnInit {
 	@Input() reviews: Array<Review> = [];
 	@Input() showId: number = 0;
 	@Output() newReview = new EventEmitter<Review>();
+	@Output() deleteReview = new EventEmitter<Review>();
 
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
+	}
+
+	public onDeleteReview(review: Review) {
+		this.deleteReview.emit(review);
 	}
 
 	public onButtonClick(event: Event) {

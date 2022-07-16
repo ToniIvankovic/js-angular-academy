@@ -46,15 +46,6 @@ li{
     margin-top: 20px;
 }
 
-.deleteIconDiv {
-    max-width: 7%;
-    cursor: pointer;
-}
-
-.deleteIcon {
-    max-width: 100%;
-}
-
 .flexBetween {
     display: flex;
     justify-content: space-between;
@@ -75,9 +66,6 @@ li{
 .starAdd {
     max-width: 15%;
 }
-.existingStar{
-    max-width: 20%;
-}
 
 #addRating{
     min-width: 35%;
@@ -88,15 +76,6 @@ li{
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.reviewScore {
-    min-width: 10%;
-    text-align: left;
-}
-
-.reviewStars {
-    max-width: 40%;
 }
 
 #postButton{

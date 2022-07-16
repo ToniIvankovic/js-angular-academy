@@ -1,2 +1,12 @@
-<p>single-review works!</p>
-<p>{{ review!.comment }}</p>
+<p>Review: {{ review!.comment }}</p>
+<div class="flexBetween">
+	<div class="verticallyCentered reviewScore">Score:</div>
+	<div class="reviewStars">
+		<img class="existingStar" *ngFor="let i of range(review!.rating)" [src]="yellowStarPath" />
+		<img class="existingStar" *ngFor="let i of range(5 - review!.rating)" [src]="greyStarPath" />
+	</div>
+	<div class="verticallyCentered reviewScore">({{ review!.rating }}/5)</div>
+	<div class="deleteIconDiv verticallyCentered">
+		<img [src]="deleteIconPath" class="deleteIcon" (click)="onDeleteButtonClick($event)" />
+	</div>
+</div>

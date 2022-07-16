@@ -53,6 +53,12 @@ export class ShowDetailsComponent implements OnInit {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
 	}
 
+	public onDeleteReview(review: Review) {
+		this.allReviews.splice(this.allReviews.indexOf(review), 1);
+		this.findReviewsForShow(this.id);
+		this.saveToLocalStorage(this.allReviews);
+	}
+
 	private _show: Show | null = null;
 	public id: number = 0;
 
