@@ -1,6 +1,6 @@
 export interface IReview {
-	uuid: number;
-	showId: number;
+	uuid: string;
+	showId: string;
 	comment: string;
 	rating: number;
 }

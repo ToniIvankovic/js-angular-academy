@@ -8,8 +8,4 @@ import { Show } from 'src/app/services/show/show.model';
 })
 export class ShowsListComponent {
 	@Input() public shows: Array<Show> = [];
-
-	public logger() {
-		console.log(this.shows);
-	}
 }

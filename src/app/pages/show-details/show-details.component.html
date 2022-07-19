@@ -1,18 +1,18 @@
 <div class="bgnd">
 	<div class="app">
-		<ng-container *ngIf="show">
+		<ng-container *ngIf="show$ | async as show">
 			<div class="showCard">
 				<div class="showImage">
-					<img src="{{ imgUrl }}" />
+					<img src="{{ show.imageUrl }}" />
 				</div>
 				<div class="showData">
-					<div class="showTitle">{{ title }}</div>
+					<div class="showTitle">{{ show.title }}</div>
 					<div class="showDescription">
-						{{ description }}
+						{{ show.description }}
 					</div>
 					<br />
 					<div class="showDescription" id="showRating">
-						<span>Average rating: <app-rating [avgRating]="avgRating"></app-rating></span>
+						<span>Average rating: <app-rating [avgRating]="show.averageRating"></app-rating></span>
 					</div>
 				</div>
 			</div>

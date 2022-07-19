@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -8,10 +9,8 @@ import { ShowService } from 'src/app/services/show/show.service';
 	styleUrls: ['./top-rated-shows.component.scss'],
 })
 export class TopRatedShowsComponent {
-	public shows: Show[] = [];
+	public shows$: Observable<Show[]>;
 	constructor(private readonly showService: ShowService) {
-		showService.fetchTopRated().forEach((observable) => {
-			observable.subscribe((value) => this.shows.push(value));
-		});
+		this.shows$ = showService.fetchTopRated();
 	}
 }

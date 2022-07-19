@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
-import { filter, timer } from 'rxjs';
+import { EMPTY, filter, map, Observable, switchMap, timer } from 'rxjs';
 import { Review } from 'src/app/services/review/review.model';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
@@ -15,29 +15,22 @@ const STORAGE_KEY = 'reviews';
 export class ShowDetailsComponent implements OnInit {
 	public reviews: Array<Review> = [];
 	private allReviews: Array<Review> = [];
+	public show$: Observable<Show | undefined>;
 
 	constructor(
 		private readonly showService: ShowService,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 	) {
-		this.router.events
-			// .pipe(filter((event: Event) => {
-			// 	return event instanceof NavigationEnd;
-			// }))
-			.subscribe((event) => {
-				if (event instanceof ActivationEnd && event.snapshot.component?.name == ShowDetailsComponent.name) {
-					this.id = event.snapshot.params['id'];
-					this.showService.fetchById(this.id).subscribe((value) => {
-						console.log(value);
-						if (!value) {
-							this.router.navigateByUrl('/');
-						}
-						this._show = value;
-						this.findReviewsForShow(this.id);
-					});
+		this.show$ = this.route.paramMap.pipe(
+			map((parammap) => parammap.get('id')),
+			switchMap((id) => {
+				if (!id) {
+					return EMPTY;
 				}
-			});
+				return showService.fetchById(id); //pretvori u str
+			}),
+		);
 	}
 
 	ngOnInit(): void {
@@ -45,7 +38,7 @@ export class ShowDetailsComponent implements OnInit {
 		this.findReviewsForShow(this.id);
 	}
 
-	private findReviewsForShow(id: number): void {
+	private findReviewsForShow(id: string): void {
 		this.reviews = this.allReviews.filter((review) => review.showid === id);
 	}
 
@@ -65,23 +58,23 @@ export class ShowDetailsComponent implements OnInit {
 		this.saveToLocalStorage(this.allReviews);
 	}
 
-	private _show: Show | null = null;
-	public id: number = 0;
+	// private _show: Show | undefined = undefined;
+	public id: string = '';
 
-	public get show(): Show | null {
-		return this._show;
-	}
+	// public get show(): Show | undefined {
+	// 	return this._show;
+	// }
 
-	public get title(): string {
-		return this.show?.title || '';
-	}
-	public get avgRating(): number | null {
-		return this.show?.averageRating || null;
-	}
-	public get description(): string {
-		return this.show?.description || '';
-	}
-	public get imgUrl(): string | null {
-		return this.show?.imageUrl || null;
-	}
+	// public get title(): string {
+	// 	return this.show?.title || '';
+	// }
+	// public get avgRating(): number | null {
+	// 	return this.show?.averageRating || null;
+	// }
+	// public get description(): string {
+	// 	return this.show?.description || '';
+	// }
+	// public get imgUrl(): string | null {
+	// 	return this.show?.imageUrl || null;
+	// }
 }

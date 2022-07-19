@@ -1,6 +1,6 @@
 import { IShow } from './show.interface';
 export class Show {
-	public uuid: number;
+	public uuid: string;
 	public title: string;
 	public description: string;
 	public averageRating: number | null;

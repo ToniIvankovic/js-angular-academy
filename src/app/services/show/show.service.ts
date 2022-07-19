@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
-import { delay, MonoTypeOperatorFunction, observable, Observable, of, OperatorFunction } from 'rxjs';
+import {
+	BehaviorSubject,
+	delay,
+	filter,
+	map,
+	MonoTypeOperatorFunction,
+	observable,
+	Observable,
+	of,
+	OperatorFunction,
+} from 'rxjs';
 import { Show } from './show.model';
 
 @Injectable({
@@ -8,14 +18,14 @@ import { Show } from './show.model';
 export class ShowService {
 	public shows: Array<Show> = [
 		{
-			uuid: 1,
+			uuid: '1',
 			title: 'Heartstopper',
 			average_rating: 4.4,
 			image_url: 'https://u2k3a4x7.stackpathcdn.com/wp-content/uploads/2022/05/heartstopper.jpg',
 			description: 'Teen drama based on a graphical novel following a young romance.',
 		},
 		{
-			uuid: 2,
+			uuid: '2',
 			title: 'Stranger Things',
 			average_rating: 4.4,
 			image_url:
@@ -24,7 +34,7 @@ export class ShowService {
 				'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
 		},
 		{
-			uuid: 3,
+			uuid: '3',
 			title: 'Love, Death & Robots',
 			average_rating: 4.2,
 			image_url:
@@ -33,7 +43,7 @@ export class ShowService {
 				' Terrifying creatures, wicked surprises and dark comedy converge in this NSFW anthology of animated stories presented by Tim Miller',
 		},
 		{
-			uuid: 4,
+			uuid: '4',
 			title: 'Élite',
 			average_rating: 3.7,
 			image_url: 'https://ntvb.tmsimg.com/assets/p15991777_b_h8_ae.jpg?w=960&h=540',
@@ -41,7 +51,7 @@ export class ShowService {
 				'When three working-class teenagers begin attending an exclusive private school in Spain, the clash between them and the wealthy students leads to murder.',
 		},
 		{
-			uuid: 5,
+			uuid: '5',
 			title: 'Young Royals',
 			average_rating: 4.2,
 			image_url: 'https://www.filmmusicsite.com/images/covers/normal/95746.jpg',
@@ -49,7 +59,7 @@ export class ShowService {
 				'Prince Wilhelm adjusts to life at his prestigious new boarding school, Hillerska, but following his heart proves more challenging than anticipated.',
 		},
 		{
-			uuid: 6,
+			uuid: '6',
 			title: "The Queen's Gambit",
 			average_rating: 4.3,
 			image_url: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/ab561e108026281.5fb4ad0673370.jpg',
@@ -57,7 +67,7 @@ export class ShowService {
 				'TOSet during the Cold War era, orphaned chess prodigy Beth Harmon struggles with addiction in a quest to become the greatest chess player in the world.DO',
 		},
 		{
-			uuid: 7,
+			uuid: '7',
 			title: 'Arcane',
 			average_rating: null,
 			image_url:
@@ -71,8 +81,8 @@ export class ShowService {
 		console.log('Created service singleton');
 	}
 
-	public get nextId(): number {
-		let maxId = 0;
+	public get nextId(): string {
+		let maxId = '0';
 		this.shows
 			.map((show) => show.uuid)
 			.forEach((id) => {
@@ -80,34 +90,33 @@ export class ShowService {
 					maxId = id;
 				}
 			});
-		return maxId + 1;
+		return `${parseInt(maxId) + 1}`;
 	}
 
 	private get delayPipe(): MonoTypeOperatorFunction<any> {
 		return delay(Math.random() * 2000 + 500);
 	}
 
-	public fetchAllShows(): Array<Observable<Show>> {
-		return this.shows.map((show) => of(show).pipe(this.delayPipe));
+	public fetchAllShows(): Observable<Show[]> {
+		return of(this.shows).pipe(this.delayPipe);
 	}
 
-	private fetchAboveRating(rating: number): Array<Observable<Show>> {
-		return this.shows
-			.filter((show) => (show.averageRating || 0) > rating)
-			.map((show) => of(show).pipe(this.delayPipe));
+	private fetchAboveRating(rating: number): Observable<Show[]> {
+		return of(this.shows.filter((show) => (show.averageRating || 0) > rating)).pipe(this.delayPipe);
 	}
 
-	public fetchTopRated(): Array<Observable<Show>> {
-		return this.fetchAboveRating(4).map((observable) => observable.pipe(this.delayPipe));
+	public fetchTopRated(): Observable<Show[]> {
+		return this.fetchAboveRating(4).pipe(this.delayPipe);
 	}
 
-	public fetchById(id: number): Observable<Show | null> {
-		const foundShow = this.shows.find((show) => show.uuid == id);
-		if (!foundShow) {
-			return of(null).pipe(this.delayPipe);
-			// throw new Error(`No show with id ${id}`);
-		}
-		return of(foundShow).pipe(this.delayPipe);
+	public fetchById(id: string): Observable<Show | undefined> {
+		const subj = new BehaviorSubject(this.shows);
+		return subj.pipe(
+			map((arr) => {
+				return arr.find((show) => show.uuid === id);
+			}),
+			this.delayPipe,
+		);
 	}
 
 	public addNewShow(show: Show): void {

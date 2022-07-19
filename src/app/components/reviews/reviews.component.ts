@@ -15,7 +15,7 @@ export class ReviewsComponent implements OnInit {
 	public reviewText: string = '';
 
 	@Input() reviews: Array<Review> = [];
-	@Input() showId: number = 0;
+	@Input() showId: string = '';
 	@Output() newReview = new EventEmitter<Review>();
 	@Output() deleteReview = new EventEmitter<Review>();
 
@@ -41,8 +41,8 @@ export class ReviewsComponent implements OnInit {
 		this.starLeave();
 	}
 
-	private generateNextId(): number {
-		return (this.reviews[this.reviews.length - 1]?.uuid || 0) + 1;
+	private generateNextId(): string {
+		return `${parseInt(this.reviews[this.reviews.length - 1]?.uuid || '0') + 1}`;
 	}
 	public starHover(starIndex: number): void {
 		if (!this.reviewStarsField) {

@@ -1,8 +1,8 @@
 import { IReview } from './review.interface';
 
 export class Review {
-	public uuid: number;
-	public showid: number;
+	public uuid: string;
+	public showid: string;
 	public rating: number;
 	public comment: string;
 
