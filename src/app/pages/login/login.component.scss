@@ -1,0 +1,18 @@
+@use "../../variables.scss" as variables;
+
+mat-card{
+    min-height: 300px;
+    min-width: 400px;
+    text-align: center;
+    padding: 5% 15%;
+    box-sizing: border-box;
+}
+
+mat-form-field{
+    display: block;
+}
+
+button{
+    background-color: variables.$secondary_color;
+    color: variables.$primary_color;
+}
