@@ -32,7 +32,7 @@ export class ReviewsComponent implements OnInit {
 			comment: this.reviewText,
 			rating: this.numberOfStars,
 			showId: this.showId,
-			uuid: this.generateNextId(),
+			id: this.generateNextId(),
 		});
 		this.newReview.emit(newReview);
 
@@ -42,7 +42,7 @@ export class ReviewsComponent implements OnInit {
 	}
 
 	private generateNextId(): string {
-		return `${parseInt(this.reviews[this.reviews.length - 1]?.uuid || '0') + 1}`;
+		return `${parseInt(this.reviews[this.reviews.length - 1]?.id || '0') + 1}`;
 	}
 	public starHover(starIndex: number): void {
 		if (!this.reviewStarsField) {
