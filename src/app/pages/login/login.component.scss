@@ -6,13 +6,25 @@ mat-card{
     text-align: center;
     padding: 5% 15%;
     box-sizing: border-box;
+    color: variables.$secondary_color;
 }
 
 mat-form-field{
     display: block;
 }
+::ng-deep.mat-form-field-ripple {
+    background-color: variables.$secondary_color !important;
+}
+mat-label{
+    color: variables.$secondary_color;
+}
 
+p{
+    margin: 1em 0;
+}
 button{
+    margin-top: 1em;
     background-color: variables.$secondary_color;
-    color: variables.$primary_color;
+    color: white;
+    width: 100%
 }
