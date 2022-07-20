@@ -110,8 +110,7 @@ export class ShowService {
 	}
 
 	public fetchById(id: string): Observable<Show | undefined> {
-		const subj = new BehaviorSubject(this.shows);
-		return subj.pipe(
+		return of(this.shows).pipe(
 			map((arr) => {
 				return arr.find((show) => show.id === id);
 			}),
