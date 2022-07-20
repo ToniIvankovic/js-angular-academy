@@ -9,6 +9,11 @@
 			<mat-label>Password</mat-label>
 			<input matInput type="password" placeholder="********" formControlName="password" />
 		</mat-form-field>
+		<ng-container *ngIf="errors.length !== 0">
+			<p class="error" *ngFor="let error of errors">
+				{{ error }}
+			</p>
+		</ng-container>
 		<p>
 			Don't have an account yet?
 			<a routerLink="/register">Sign up</a>
