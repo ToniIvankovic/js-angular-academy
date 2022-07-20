@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
 	selector: 'app-register',
@@ -7,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-	constructor() {
+	constructor(private readonly authService: AuthService, private readonly router: Router) {
 		this.form = new FormGroup({
 			email: new FormControl('', [Validators.required, Validators.email]),
 			password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -37,8 +39,17 @@ export class RegisterComponent {
 			return;
 		}
 
-		//TODO acutal register
-		console.log('register!!');
+		this.authService
+			.register({
+				email: this.form.controls['email'].value,
+				password: this.form.controls['password'].value,
+				password_confirmation: this.form.controls['password2'].value,
+			})
+			.subscribe((user) => {
+				//Add error handling
+				console.log(user);
+				this.router.navigate(['/']);
+			});
 	}
 
 	private checkForErrors() {

@@ -12,6 +12,7 @@ import { ShowDetailsModule } from './pages/show-details/show-details.module';
 import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
 		RegisterModule,
 		LoginModule,
 		RegisterModule,
+		HttpClientModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

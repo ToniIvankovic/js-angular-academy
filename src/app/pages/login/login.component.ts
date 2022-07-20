@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
 	selector: 'app-login',
@@ -7,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-	constructor() {
+	constructor(private readonly authService: AuthService, private readonly router: Router) {
 		this.form = new FormGroup({
 			email: new FormControl('', [Validators.required, Validators.email]),
 			password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -35,8 +37,16 @@ export class LoginComponent {
 			return;
 		}
 
-		//TODO acutal login
-		console.log('login!!');
+		this.authService
+			.login({
+				email: this.form.controls['email'].value,
+				password: this.form.controls['password'].value,
+			})
+			.subscribe((user) => {
+				//Add error handling
+				console.log(user);
+				this.router.navigate(['/']);
+			});
 	}
 
 	private checkForErrors() {
