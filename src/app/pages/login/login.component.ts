@@ -24,19 +24,24 @@ export class LoginComponent {
 		return this.form.controls['password'].errors;
 	}
 
-	public get formDirty() {
-		return this.form.controls['email'].dirty && this.form.controls['password'].dirty;
-	}
-
 	public errors: string[] = [];
 
 	public onLoginClick(event: Event) {
 		this.errors = [];
 		event.preventDefault();
 
+		this.checkForErrors();
+		if (this.errors.length !== 0) {
+			return;
+		}
+
+		//TODO acutal login
+		console.log('login!!');
+	}
+
+	private checkForErrors() {
 		if (this.emailErrors || this.passwordErrors) {
 			// this.errors = of(["A"]).pipe(delay(500));
-			this.errors = [];
 			if (this.emailErrors) {
 				if (this.emailErrors['email']) {
 					this.errors.push('Invalid email address format');
@@ -55,13 +60,6 @@ export class LoginComponent {
 					this.errors.push('Password problem');
 				}
 			}
-			console.log(this.emailErrors);
-			console.log(this.passwordErrors);
-			console.log(!!this.errors);
-			console.log(this.errors);
-			return;
 		}
-
-		//TODO acutal login
 	}
 }

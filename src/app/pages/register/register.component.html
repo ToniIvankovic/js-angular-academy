@@ -1,1 +1,27 @@
-<p>register works!</p>
+<mat-card *ngIf="form" [formGroup]="form">
+	<form>
+		<mat-card-title>Register</mat-card-title>
+		<mat-form-field>
+			<mat-label>Email</mat-label>
+			<input matInput type="email" placeholder="jane.doe@gmail.com" formControlName="email" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input matInput type="password" placeholder="********" formControlName="password" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Repeat password</mat-label>
+			<input matInput type="password" placeholder="********" formControlName="password2" />
+		</mat-form-field>
+		<ng-container *ngIf="errors.length !== 0">
+			<p class="error" *ngFor="let error of errors">
+				{{ error }}
+			</p>
+		</ng-container>
+		<p>
+			Already have an account?
+			<a routerLink="/login">Log in</a>
+		</p>
+		<button mat-raised-button type="submit" (click)="onSignUpClick($event)">Sign up</button>
+	</form>
+</mat-card>
