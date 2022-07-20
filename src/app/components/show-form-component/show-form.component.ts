@@ -18,7 +18,7 @@ export class ShowFormComponent {
 
 	public onSubmit() {
 		const newShow = new Show({
-			uuid: this.showService.nextId,
+			id: this.showService.nextId,
 			title: this.showName,
 			description: this.description,
 			average_rating: null,

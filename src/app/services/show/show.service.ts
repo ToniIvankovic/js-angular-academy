@@ -18,14 +18,14 @@ import { Show } from './show.model';
 export class ShowService {
 	public shows: Array<Show> = [
 		{
-			uuid: '1',
+			id: '1',
 			title: 'Heartstopper',
 			average_rating: 4.4,
 			image_url: 'https://u2k3a4x7.stackpathcdn.com/wp-content/uploads/2022/05/heartstopper.jpg',
 			description: 'Teen drama based on a graphical novel following a young romance.',
 		},
 		{
-			uuid: '2',
+			id: '2',
 			title: 'Stranger Things',
 			average_rating: 4.4,
 			image_url:
@@ -34,7 +34,7 @@ export class ShowService {
 				'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
 		},
 		{
-			uuid: '3',
+			id: '3',
 			title: 'Love, Death & Robots',
 			average_rating: 4.2,
 			image_url:
@@ -43,7 +43,7 @@ export class ShowService {
 				' Terrifying creatures, wicked surprises and dark comedy converge in this NSFW anthology of animated stories presented by Tim Miller',
 		},
 		{
-			uuid: '4',
+			id: '4',
 			title: 'Élite',
 			average_rating: 3.7,
 			image_url: 'https://ntvb.tmsimg.com/assets/p15991777_b_h8_ae.jpg?w=960&h=540',
@@ -51,7 +51,7 @@ export class ShowService {
 				'When three working-class teenagers begin attending an exclusive private school in Spain, the clash between them and the wealthy students leads to murder.',
 		},
 		{
-			uuid: '5',
+			id: '5',
 			title: 'Young Royals',
 			average_rating: 4.2,
 			image_url: 'https://www.filmmusicsite.com/images/covers/normal/95746.jpg',
@@ -59,7 +59,7 @@ export class ShowService {
 				'Prince Wilhelm adjusts to life at his prestigious new boarding school, Hillerska, but following his heart proves more challenging than anticipated.',
 		},
 		{
-			uuid: '6',
+			id: '6',
 			title: "The Queen's Gambit",
 			average_rating: 4.3,
 			image_url: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/ab561e108026281.5fb4ad0673370.jpg',
@@ -67,7 +67,7 @@ export class ShowService {
 				'TOSet during the Cold War era, orphaned chess prodigy Beth Harmon struggles with addiction in a quest to become the greatest chess player in the world.DO',
 		},
 		{
-			uuid: '7',
+			id: '7',
 			title: 'Arcane',
 			average_rating: null,
 			image_url:
@@ -84,7 +84,7 @@ export class ShowService {
 	public get nextId(): string {
 		let maxId = '0';
 		this.shows
-			.map((show) => show.uuid)
+			.map((show) => show.id)
 			.forEach((id) => {
 				if (id > maxId) {
 					maxId = id;
@@ -113,15 +113,15 @@ export class ShowService {
 		const subj = new BehaviorSubject(this.shows);
 		return subj.pipe(
 			map((arr) => {
-				return arr.find((show) => show.uuid === id);
+				return arr.find((show) => show.id === id);
 			}),
 			this.delayPipe,
 		);
 	}
 
 	public addNewShow(show: Show): void {
-		if (this.shows.map((show) => show.uuid).find((id) => id == show.uuid)) {
-			throw new Error(`Cannot add existing uuid of ${show.uuid}`);
+		if (this.shows.map((show) => show.id).find((id) => id == show.id)) {
+			throw new Error(`Cannot add existing uuid of ${show.id}`);
 		}
 		this.shows.push(show);
 	}
