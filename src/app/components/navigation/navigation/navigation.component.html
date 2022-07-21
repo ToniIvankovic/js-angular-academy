@@ -13,11 +13,13 @@
 	</div>
 	<div class="finder">
 		<div class="right">
-			<mat-form-field>
-				<mat-label>Find by id:</mat-label>
-				<input matInput [(ngModel)]="id" name="id" />
-			</mat-form-field>
-			<button mat-raised-button color="btn" type="submit" [routerLink]="'/show/' + id">Find</button>
+			<form>
+				<mat-form-field>
+					<mat-label>Find by id:</mat-label>
+					<input matInput [(ngModel)]="id" name="id" />
+				</mat-form-field>
+				<button mat-raised-button color="btn" type="submit" [routerLink]="'/show/' + id">Find</button>
+			</form>
 		</div>
 	</div>
 </nav>
