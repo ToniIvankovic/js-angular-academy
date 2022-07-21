@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, EMPTY } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -45,6 +47,7 @@ export class RegisterComponent {
 				password: this.form.controls['password'].value,
 				password_confirmation: this.form.controls['password2'].value,
 			})
+			.pipe(catchError(this.handleErrorResponse.bind(this)))
 			.subscribe((user) => {
 				//Add error handling
 				console.log(user);
@@ -76,5 +79,10 @@ export class RegisterComponent {
 		} else if (this.form.controls['password'].value !== this.form.controls['password2'].value) {
 			this.errors.push("Passwords don't match");
 		}
+	}
+
+	private handleErrorResponse(error: HttpErrorResponse) {
+		this.errors = error.error.errors;
+		return EMPTY;
 	}
 }

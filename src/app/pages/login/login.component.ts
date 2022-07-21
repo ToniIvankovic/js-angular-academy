@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, EMPTY, throwError } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -42,8 +44,8 @@ export class LoginComponent {
 				email: this.form.controls['email'].value,
 				password: this.form.controls['password'].value,
 			})
+			.pipe(catchError(this.handleErrorResponse.bind(this)))
 			.subscribe((user) => {
-				//Add error handling
 				console.log(user);
 				this.router.navigate(['/']);
 			});
@@ -71,5 +73,10 @@ export class LoginComponent {
 				}
 			}
 		}
+	}
+
+	private handleErrorResponse(error: HttpErrorResponse) {
+		this.errors = error.error.errors;
+		return EMPTY;
 	}
 }
