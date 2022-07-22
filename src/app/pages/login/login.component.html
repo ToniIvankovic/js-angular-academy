@@ -1,0 +1,23 @@
+<mat-card *ngIf="form" [formGroup]="form">
+	<form>
+		<mat-card-title>Login</mat-card-title>
+		<mat-form-field>
+			<mat-label>Email</mat-label>
+			<input matInput type="email" placeholder="jane.doe@gmail.com" formControlName="email" />
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input matInput type="password" placeholder="********" formControlName="password" />
+		</mat-form-field>
+		<ng-container *ngIf="errors.length !== 0">
+			<p class="error" *ngFor="let error of errors">
+				{{ error }}
+			</p>
+		</ng-container>
+		<p>
+			Don't have an account yet?
+			<a routerLink="/register">Sign up</a>
+		</p>
+		<button mat-raised-button type="submit" (click)="onLoginClick($event)">Login</button>
+	</form>
+</mat-card>

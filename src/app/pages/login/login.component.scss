@@ -1,0 +1,37 @@
+@use "../../variables.scss" as variables;
+
+mat-card{
+    min-height: 300px;
+    min-width: 400px;
+    text-align: center;
+    padding: 5% 15%;
+    box-sizing: border-box;
+    color: variables.$secondary_color;
+}
+
+mat-form-field{
+    display: block;
+}
+::ng-deep.mat-form-field-ripple {
+    background-color: variables.$secondary_color !important;
+}
+mat-label{
+    color: variables.$secondary_color;
+}
+
+p{
+    margin: 1em 0;
+}
+button{
+    margin-top: 1em;
+    background-color: variables.$secondary_color;
+    color: white;
+    width: 100%
+}
+
+.error{
+    background-color: darkred;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5em;
+}

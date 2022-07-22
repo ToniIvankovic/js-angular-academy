@@ -1,5 +1,10 @@
 @use "../../variables.scss" as variables;
 
+h2{
+    color: variables.$secondary_color;
+    margin-top: 2em;
+}
+
 img{
     max-height: 400px;
     object-fit: cover;
