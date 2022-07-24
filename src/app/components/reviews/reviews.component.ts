@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { timer } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { IUser } from 'src/app/services/auth/user.interface';
 import { Review } from 'src/app/services/review/review.model';
 
@@ -20,6 +21,8 @@ export class ReviewsComponent implements OnInit {
 	@Output() newReview = new EventEmitter<Review>();
 	@Output() deleteReview = new EventEmitter<Review>();
 
+	constructor(private readonly authService: AuthService) {}
+
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
 	}
@@ -37,7 +40,7 @@ export class ReviewsComponent implements OnInit {
 			rating: this.numberOfStars,
 			showId: this.showId,
 			id: this.generateNextId(),
-			user: this.getActiveUser(),
+			user: this.authService.getCurrentUser(),
 		});
 		this.newReview.emit(newReview);
 
@@ -46,14 +49,6 @@ export class ReviewsComponent implements OnInit {
 		this.starLeave();
 	}
 
-	private getActiveUser(): IUser {
-		//TODO
-		return {
-			email: 'example@example.com',
-			image_url: '',
-			id: '',
-		};
-	}
 	private generateNextId(): string {
 		return `${parseInt(this.reviews[this.reviews.length - 1]?.id || '0') + 1}`;
 	}
