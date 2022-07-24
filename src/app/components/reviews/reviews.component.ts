@@ -51,9 +51,9 @@ export class ReviewsComponent implements OnInit {
 		let newCounter = 1;
 		for (let otherStar of this.reviewStarsField.children) {
 			if (newCounter > starIndex) {
-				otherStar.setAttribute('src', this.greyStarPath);
+				otherStar.innerHTML = 'star_border';
 			} else {
-				otherStar.setAttribute('src', this.yellowStarPath);
+				otherStar.innerHTML = 'star';
 			}
 			newCounter++;
 		}
@@ -64,11 +64,11 @@ export class ReviewsComponent implements OnInit {
 			return;
 		}
 		let starIndex = 1;
-		for (let star of this.reviewStarsField.children) {
+		for (let otherStar of this.reviewStarsField.children) {
 			if (this.numberOfStars === 0 || starIndex > this.numberOfStars) {
-				star.setAttribute('src', this.greyStarPath);
+				otherStar.innerHTML = 'star_border';
 			} else {
-				star.setAttribute('src', this.yellowStarPath);
+				otherStar.innerHTML = 'star';
 			}
 			starIndex++;
 		}

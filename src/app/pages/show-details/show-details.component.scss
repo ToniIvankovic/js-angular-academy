@@ -26,6 +26,7 @@ img{
 .mat-card{
     margin: 2em;
     padding: 0;
+    width: calc(100% - 4em);
     background-color: white;
     color: s.$purple;
     display: inline-block;

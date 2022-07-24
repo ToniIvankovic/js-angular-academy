@@ -1,8 +1,13 @@
-@use "../../variables.scss" as variables;
+@use "../../../styles.scss" as s;
 
+:host{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 0 4em 0 2em;
+}
 h2{
-    color: variables.$secondary_color;
-    margin-top: 2em;
+    color: white;
+    font-weight: 400;
 }
 
 img{
@@ -12,11 +17,11 @@ img{
     border-radius: 15px 15px 0px 0px;
 }
 
-input[type="button"], .ratingEntry {
+input[type="button"] {
     background-color: white;
-    color: variables.$secondary_color;
+    color: s.$purple;
     display: inline-block;
-    border-radius: 15px;
+    border-radius: 24px;
     font-size: large;
     font-weight: 500;
 }
@@ -24,6 +29,17 @@ input[type="button"], .ratingEntry {
 textarea {
     resize: none;
     font-family: inherit;
+    font-size: 20px;
+    color: s.$light_purple;
+    margin: 10px 0;
+    border-radius: 24px;
+    border: none;
+    padding: 1em 2em;
+}
+
+::placeholder{
+    color: s.$light_purple;
+    line-height: 2em;
 }
 
 .reviewsSection {
@@ -31,12 +47,6 @@ textarea {
     flex-direction: column;
 }
 
-input, textarea {
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    padding: 10px;
-}
 
 ul {
     list-style-type: none;
@@ -45,12 +55,12 @@ ul {
 }
 
 li{
-    background-color: variables.$secondary_color_accent;
+    background-color: s.$purple;
     color: white;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 100%;
-    margin-top: 20px;
+    border-radius: 24px;
+    padding: 2em;
+    margin-top: 24px;
+    width: 100%;
 }
 
 .flexBetween {
@@ -59,23 +69,34 @@ li{
     margin: 1em 0;
 }
 
+
 .ratingEntry {
+    display: inline-block;
+    width: 50%;
+}
+.flexRow{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: start;
     padding: 15px;
 } 
 
 #stars {
+    flex-grow: 1;
+    max-width: calc(6.5 * 24px);
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 .starAdd {
     max-width: 15%;
+    color: s.$light_purple;
 }
 
 #addRating{
-    min-width: 35%;
+    padding: 1em;
+    font-size: 20px;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -86,5 +107,18 @@ li{
 }
 
 #postButton{
+    display: inline-block;
+    padding: 0.5em 4em;
+    font-size: 14px;
+    font-weight: 500;
+    color: s.$purple;
+    background-color: s.$very_light_purple;
+    border-radius: 32px;
     cursor: pointer;
+}
+
+.buttonDiv{
+    display: inline-block;
+    text-align: right;
+    width: 50%;
 }

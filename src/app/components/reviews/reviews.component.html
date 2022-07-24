@@ -1,28 +1,38 @@
 <h2>Reviews</h2>
-<div class="reviewsSection">
-	<textarea
-		id="reviewText"
-		name="reviewText"
-		type="text"
-		placeholder="Add review"
-		rows="3"
-		[(ngModel)]="reviewText"
-	></textarea>
-	<div class="ratingEntry">
-		<span class="verticallyCentered" id="addRating"> Add a rating: </span>
-		<div id="stars">
-			<img
-				*ngFor="let i of [1, 2, 3, 4, 5]"
-				id="star"
-				(mouseover)="starHover(i)"
-				(mouseleave)="starLeave()"
-				(click)="numberOfStars = i"
-				class="starAdd"
-				[src]="greyStarPath"
-			/>
+<div>
+	<form class="reviewsSection">
+		<textarea
+			id="reviewText"
+			name="reviewText"
+			type="text"
+			placeholder="Enter review"
+			rows="2"
+			[(ngModel)]="reviewText"
+		></textarea>
+
+		<div class="starsAndButton">
+			<div class="ratingEntry">
+				<div class="flexRow">
+					<span class="verticallyCentered" id="addRating"> Rating </span>
+					<div id="stars">
+						<mat-icon
+							*ngFor="let i of [1, 2, 3, 4, 5]"
+							(mouseover)="starHover(i)"
+							(mouseleave)="starLeave()"
+							(click)="numberOfStars = i"
+							class="starAdd"
+						>
+							star_border
+						</mat-icon>
+					</div>
+				</div>
+			</div>
+
+			<div class="buttonDiv">
+				<button mat-button id="postButton" (click)="onButtonClick($event)">POST</button>
+			</div>
 		</div>
-	</div>
-	<input id="postButton" type="button" value="Post" (click)="onButtonClick($event)" />
+	</form>
 	<ul class="reviewsList" *ngIf="reviews.length !== 0">
 		<li *ngFor="let review of reviews">
 			<app-single-review [review]="review" (reviewDelete)="onDeleteReview($event)"></app-single-review>
