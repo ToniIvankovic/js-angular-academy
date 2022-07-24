@@ -7,4 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayoutComponent {
 	constructor() {}
+
+	public calcWidth() {
+		return document.documentElement.clientWidth * 0.75;
+	}
 }
