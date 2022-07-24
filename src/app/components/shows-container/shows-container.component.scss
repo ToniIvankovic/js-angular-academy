@@ -1,12 +1,15 @@
-@use "../../variables.scss" as variables;
+@use "../../../styles.scss" as s;
 // Kako dodati pozadinu nekoj komponenti iz scss datoteke te komponente, umjesto iz glavnog stylea?
 :host{
-	background-color: variables.$primary_color;
+	background-color: s.$dark_purple;
+    border: 1px solid black;
     display: inline-block;
 }
 
 .paddingWrapper{
     padding: 3em 0 5em 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 .centeredComponent{
     justify-content: center;

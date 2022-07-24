@@ -1,8 +1,9 @@
 <div class="container">
-	<div class="stars">
+	<mat-icon>star</mat-icon>
+	<div class="ratingNum">{{ ratingText }}</div>
+	<div class="stars" *ngIf="avgRating">
 		<div class="greyStars vertical-center">
 			<div class="yellowStars" [style.width.px]="calcYellowWidth(ratingWidth)"></div>
 		</div>
 	</div>
-	<div class="ratingNum">({{ ratingText }})</div>
 </div>
