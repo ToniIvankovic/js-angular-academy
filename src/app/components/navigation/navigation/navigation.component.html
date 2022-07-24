@@ -1,9 +1,9 @@
-<nav class="bgnd-secondary">
+<nav class="bgnd-secondary flex-column">
+	<img [src]="imgSrc" />
 	<div class="menus">
 		<a
 			class="menu"
-			*ngFor="let menu of menus"
-			[style.width.%]="99 / menus.length"
+			*ngFor="let menu of menusTop"
 			[routerLink]="menu.url"
 			[routerLinkActive]="'active'"
 			[routerLinkActiveOptions]="{ exact: true }"
@@ -11,15 +11,9 @@
 			{{ menu.title }}
 		</a>
 	</div>
-	<div class="finder">
-		<div class="right">
-			<form>
-				<mat-form-field>
-					<mat-label>Find by id:</mat-label>
-					<input matInput [(ngModel)]="id" name="id" />
-				</mat-form-field>
-				<button mat-raised-button color="btn" type="submit" [routerLink]="'/show/' + id">Find</button>
-			</form>
-		</div>
+	<div class="bottomContainer">
+		<a class="menu" *ngFor="let menu of menusBottom" [routerLink]="menu.url">
+			{{ menu.title }}
+		</a>
 	</div>
 </nav>

@@ -9,14 +9,25 @@ import { Router } from '@angular/router';
 export class NavigationComponent {
 	constructor(private readonly router: Router) {}
 
-	public readonly menus = [
+	public readonly imgSrc = '../../../../assets/logo.svg';
+	public readonly menusTop = [
 		{
 			title: 'All shows',
 			url: '/',
 		},
 		{
-			title: 'Top-rated shows',
+			title: 'Top-rated',
 			url: '/top-rated',
+		},
+		{
+			title: 'My profile',
+			url: '/profile',
+		},
+	];
+	public readonly menusBottom = [
+		{
+			title: 'Log out',
+			url: '/logout',
 		},
 	];
 
