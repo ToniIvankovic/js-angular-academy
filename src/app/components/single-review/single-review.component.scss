@@ -1,27 +1,26 @@
-.deleteIconDiv {
-    max-width: 7%;
-    cursor: pointer;
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 5fr 15fr 1fr;
 }
 
-.deleteIcon {
-    max-width: 100%;
+.profilePic{
+    font-size: 40px;
+    color: white;
+    width: 60px;
+    height: 40px;
 }
 
-.existingStar{
-    max-width: 20%;
+.numberRating{
+    display: inline-block;
+    width: 20%;
 }
+
 
 .flexBetween {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 1em 0;
-}
-
-.verticallyCentered {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    margin: 0 1em;
 }
 
 .reviewScore {
@@ -29,6 +28,38 @@
     text-align: left;
 }
 
-.reviewStars {
-    max-width: 40%;
+.scoreContainer{
+    display: flex;
+    justify-content: start;
+}
+
+.starsContainer {
+    flex-grow: 1;
+    max-width: 50%;
+    display: inline-block;
+}
+
+.reviewStars{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.verticallyCentered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.existingStar{
+    max-width: 15%;
+}
+
+.deleteIconDiv {
+    width: 100%;
+    cursor: pointer;
+}
+
+.deleteIcon {
+    max-width: 100%;
 }

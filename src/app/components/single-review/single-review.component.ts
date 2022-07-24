@@ -7,7 +7,7 @@ import { Review } from 'src/app/services/review/review.model';
 	styleUrls: ['./single-review.component.scss'],
 })
 export class SingleReviewComponent {
-	@Input() review: Review | null = null;
+	@Input() review?: Review;
 	@Output() reviewDelete = new EventEmitter<Review>();
 	public readonly greyStarPath = '../../../assets/greyStar.png';
 	public readonly yellowStarPath = '../../../assets/yellowStar.png';

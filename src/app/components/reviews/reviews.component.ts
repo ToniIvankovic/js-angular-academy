@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { timer } from 'rxjs';
+import { IUser } from 'src/app/services/auth/user.interface';
 import { Review } from 'src/app/services/review/review.model';
 
 @Component({
@@ -28,11 +29,15 @@ export class ReviewsComponent implements OnInit {
 	}
 
 	public onButtonClick(event: Event) {
+		if (this.numberOfStars === 0) {
+			return;
+		}
 		const newReview = new Review({
 			comment: this.reviewText,
 			rating: this.numberOfStars,
 			showId: this.showId,
 			id: this.generateNextId(),
+			user: this.getActiveUser(),
 		});
 		this.newReview.emit(newReview);
 
@@ -41,6 +46,14 @@ export class ReviewsComponent implements OnInit {
 		this.starLeave();
 	}
 
+	private getActiveUser(): IUser {
+		//TODO
+		return {
+			email: 'example@example.com',
+			image_url: '',
+			id: '',
+		};
+	}
 	private generateNextId(): string {
 		return `${parseInt(this.reviews[this.reviews.length - 1]?.id || '0') + 1}`;
 	}

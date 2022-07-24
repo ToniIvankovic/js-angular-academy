@@ -1,11 +1,27 @@
-<p>Review: {{ review!.comment }}</p>
-<div class="flexBetween">
-	<div class="verticallyCentered reviewScore">Score:</div>
-	<div class="reviewStars">
-		<img class="existingStar" *ngFor="let i of range(review!.rating)" [src]="yellowStarPath" />
-		<img class="existingStar" *ngFor="let i of range(5 - review!.rating)" [src]="greyStarPath" />
+<div class="grid">
+	<div>
+		<img
+			*ngIf="review!.user && review!.user.image_url; else elseBlock"
+			[src]="review!.user.image_url"
+			class="profilePic"
+		/>
+		<ng-template #elseBlock>
+			<mat-icon class="profilePic">person_pin</mat-icon>
+		</ng-template>
 	</div>
-	<div class="verticallyCentered reviewScore">({{ review!.rating }}/5)</div>
+	<div class="flexBetween">
+		<div>{{ review!.user.email }}</div>
+		<div class="scoreContainer">
+			<div class="reviewScore numberRating">{{ review!.rating }}/5</div>
+			<div class="starsContainer">
+				<div class="reviewStars">
+					<img class="existingStar" *ngFor="let i of range(review!.rating)" [src]="yellowStarPath" />
+					<img class="existingStar" *ngFor="let i of range(5 - review!.rating)" [src]="greyStarPath" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<p>{{ review!.comment }}</p>
 	<div class="deleteIconDiv verticallyCentered">
 		<img [src]="deleteIconPath" class="deleteIcon" (click)="onDeleteButtonClick($event)" />
 	</div>
