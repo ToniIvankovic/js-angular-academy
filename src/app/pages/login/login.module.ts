@@ -6,10 +6,19 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
 	declarations: [LoginComponent],
 	exports: [LoginComponent],
-	imports: [CommonModule, MatCardModule, MatInputModule, RouterModule, MatButtonModule, ReactiveFormsModule],
+	imports: [
+		CommonModule,
+		MatCardModule,
+		MatInputModule,
+		RouterModule,
+		MatButtonModule,
+		ReactiveFormsModule,
+		MatIconModule,
+	],
 })
 export class LoginModule {}
