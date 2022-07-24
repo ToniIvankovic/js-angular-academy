@@ -3,10 +3,14 @@
     grid-template-columns: 1fr 5fr 15fr 1fr;
 }
 
+img.profilePic{
+    border-radius: 20px;
+    object-fit: cover;
+}
 .profilePic{
     font-size: 40px;
     color: white;
-    width: 60px;
+    width: 40px;
     height: 40px;
 }
 
@@ -19,31 +23,37 @@
 .flexBetween {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     margin: 0 1em;
+    >*{
+        padding-block: 5px;
+    }
 }
 
-.reviewScore {
-    min-width: 10%;
-    text-align: left;
-}
 
 .scoreContainer{
     display: flex;
     justify-content: start;
+    align-items: center;
+    width: fit-content;
 }
 
-.starsContainer {
-    flex-grow: 1;
-    max-width: 50%;
-    display: inline-block;
+.reviewScore {
+    width: 2em;
+    text-align: left;
 }
 
 .reviewStars{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
+    width: fit-content;
 }
 
+.starsContainer {
+    // flex-grow: 1;
+    width: fit-content;
+    display: inline-block;
+}
 
 .verticallyCentered {
     display: flex;
@@ -52,7 +62,10 @@
 }
 
 .existingStar{
-    max-width: 15%;
+    box-sizing: border-box;
+    font-size: 20px;
+    padding-inline: 0.2em;
+    width: fit-content;
 }
 
 .deleteIconDiv {
@@ -61,5 +74,7 @@
 }
 
 .deleteIcon {
-    max-width: 100%;
+    width: 100%;
+    font-size: 40px;
+    height: fit-content;
 }

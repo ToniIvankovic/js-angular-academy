@@ -15,14 +15,14 @@
 			<div class="reviewScore numberRating">{{ review!.rating }}/5</div>
 			<div class="starsContainer">
 				<div class="reviewStars">
-					<img class="existingStar" *ngFor="let i of range(review!.rating)" [src]="yellowStarPath" />
-					<img class="existingStar" *ngFor="let i of range(5 - review!.rating)" [src]="greyStarPath" />
+					<mat-icon class="existingStar" *ngFor="let i of range(review!.rating)">star</mat-icon>
 				</div>
 			</div>
 		</div>
 	</div>
 	<p>{{ review!.comment }}</p>
 	<div class="deleteIconDiv verticallyCentered">
-		<img [src]="deleteIconPath" class="deleteIcon" (click)="onDeleteButtonClick($event)" />
+		<mat-icon class="deleteIcon" (click)="onDeleteButtonClick($event)">delete_outline</mat-icon>
+		<!-- <img [src]="deleteIconPath" class="deleteIcon" (click)="onDeleteButtonClick($event)" /> -->
 	</div>
 </div>

@@ -65,8 +65,12 @@ export class ReviewsComponent implements OnInit {
 		for (let otherStar of this.reviewStarsField.children) {
 			if (newCounter > starIndex) {
 				otherStar.innerHTML = 'star_border';
+				otherStar.classList.add('colorStar');
+				otherStar.classList.remove('whiteStar');
 			} else {
 				otherStar.innerHTML = 'star';
+				otherStar.classList.add('whiteStar');
+				otherStar.classList.remove('colorStar');
 			}
 			newCounter++;
 		}
@@ -80,8 +84,12 @@ export class ReviewsComponent implements OnInit {
 		for (let otherStar of this.reviewStarsField.children) {
 			if (this.numberOfStars === 0 || starIndex > this.numberOfStars) {
 				otherStar.innerHTML = 'star_border';
+				otherStar.classList.add('colorStar');
+				otherStar.classList.remove('whiteStar');
 			} else {
 				otherStar.innerHTML = 'star';
+				otherStar.classList.add('whiteStar');
+				otherStar.classList.remove('colorStar');
 			}
 			starIndex++;
 		}

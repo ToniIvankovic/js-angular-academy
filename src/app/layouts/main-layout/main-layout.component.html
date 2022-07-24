@@ -1,4 +1,4 @@
 <app-navigation></app-navigation>
-<div class="rest" id="rest" [style.width.px]="calcWidth()">
+<div class="rest" id="rest" [style.width.px]="calcWidth()" (window:resize)="onResize()">
 	<router-outlet></router-outlet>
 </div>

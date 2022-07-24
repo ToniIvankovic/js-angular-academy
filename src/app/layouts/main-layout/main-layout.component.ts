@@ -11,4 +11,8 @@ export class MainLayoutComponent {
 	public calcWidth() {
 		return document.documentElement.clientWidth * 0.75;
 	}
+
+	public onResize() {
+		document.getElementById('rest')!.style.width = this.calcWidth() + 'px';
+	}
 }
