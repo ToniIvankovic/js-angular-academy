@@ -1,37 +1,50 @@
-@use "../../variables.scss" as variables;
+@use "/src/styles.scss" as s;
+// @import url("../login/login.component.scss"); // Ne mogu koristiti import jer se ne evaluiraju varijable
+
+:host{
+    height: 600px;
+    width: 500px;
+}
 
 mat-card{
-    min-height: 300px;
-    min-width: 400px;
+    min-height: 500px;
+    min-width: 500px;
     text-align: center;
     padding: 5% 15%;
     box-sizing: border-box;
-    color: variables.$secondary_color;
+    border-radius: 24px;
+}
+
+mat-card-title{
+    margin: 1em 0;
 }
 
 mat-form-field{
     display: block;
-}
-::ng-deep.mat-form-field-ripple {
-    background-color: variables.$secondary_color !important;
-}
-mat-label{
-    color: variables.$secondary_color;
+    margin: 1em 0;
 }
 
 p{
     margin: 1em 0;
 }
-button{
-    margin-top: 1em;
-    background-color: variables.$secondary_color;
-    color: white;
-    width: 100%
+
+a{
+    text-decoration: none;
+    color: unset;
+    font-weight: 500;
 }
 
-.error{
-    background-color: darkred;
-    color: white;
-    border-radius: 5px;
-    padding: 0.5em;
+button[type="submit"]{
+    margin: 1.5em 0;
+    background-color: white;
+    padding: 0.5em 3em;
+    border-radius: 32px;
+    color: s.$purple;
+    max-width: 50%;
+}
+
+.mat-form-field-invalid{
+    mat-hint{
+        color: s.$error;
+    }
 }
