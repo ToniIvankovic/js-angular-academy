@@ -18,3 +18,23 @@ app-show-card{
     box-sizing: border-box;
     width: 240px;
 }
+
+@media screen and (max-width: 600px) {
+    .flexbox{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
+    a{
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        color: unset;
+    }
+    app-show-card{
+        width: 100%;
+    }
+}

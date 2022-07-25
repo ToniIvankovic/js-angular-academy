@@ -1,7 +1,6 @@
 @use "../../../styles.scss" as s;
 // Kako dodati pozadinu nekoj komponenti iz scss datoteke te komponente, umjesto iz glavnog stylea?
 :host{
-	background-color: s.$dark_purple;
     box-sizing: border-box;
     display: inline-block;
 }
