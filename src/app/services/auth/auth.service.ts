@@ -19,7 +19,7 @@ export class AuthService {
 	}
 	public getCurrentUser(): IUser | undefined {
 		//TODO
-		return undefined;
+		// return undefined;
 		return {
 			email: 'example@example.com',
 			image_url:

@@ -8,7 +8,9 @@
 </div>
 <div [class]="navigationVisible ? 'hamburgerBackground' : ''" (click)="onHambMenuClick()"></div>
 <div class="navigationWrapper" [class]="navigationVisible ? 'navigationWrapperVisible' : ''">
-	<img [src]="logoImgUrl" class="navigationImg" />
+	<a [routerLink]="'/'">
+		<img [src]="logoImgUrl" class="navigationImg" />
+	</a>
 	<mat-icon *ngIf="navigationVisible" (click)="onHambMenuClick()">clear</mat-icon>
 	<app-navigation [class]="navigationVisible ? 'navigation' : ''" (linkClicked)="onHambMenuClick()"></app-navigation>
 </div>
