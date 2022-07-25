@@ -1,13 +1,9 @@
 @use "../../../styles.scss" as s;
 
-:host{
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    padding: 0 4em 0 2em;
-}
 h2{
     color: white;
     font-weight: 400;
+    display: inline-block;
 }
 
 img{
@@ -130,4 +126,34 @@ li{
 
 .whiteStar{
     color: white;
+}
+
+
+@media screen and (min-width: 1001px) {
+    :host{
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        padding: 0 4em 0 2em;
+    }
+    
+}
+
+@media screen and (max-width: 1000px) {
+    :host{
+        padding: 0 2em;
+        box-sizing: border-box;
+        display: block;
+    }
+    .rest{
+        display: inline-bloc;
+    }
+    .buttonDiv{
+        width: 40%;
+    }
+    .ratingEntry{
+        width: 60%;
+    }
+    .flexRow{
+        padding: 0.5em;
+    }
 }

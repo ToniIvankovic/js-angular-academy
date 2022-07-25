@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 	styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
+	@Output() public linkClicked = new EventEmitter();
 	constructor(private readonly router: Router) {}
 
 	public readonly menusTop = [
@@ -33,5 +34,9 @@ export class NavigationComponent {
 	public id: string = '';
 	public findById() {
 		console.log(this.id);
+	}
+
+	public onClick() {
+		this.linkClicked.emit();
 	}
 }

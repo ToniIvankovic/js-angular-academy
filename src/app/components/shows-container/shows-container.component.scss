@@ -2,7 +2,6 @@
 // Kako dodati pozadinu nekoj komponenti iz scss datoteke te komponente, umjesto iz glavnog stylea?
 :host{
 	background-color: s.$dark_purple;
-    border: 1px solid black;
     box-sizing: border-box;
     display: inline-block;
 }

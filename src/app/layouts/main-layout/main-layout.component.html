@@ -10,7 +10,7 @@
 <div class="navigationWrapper" [class]="navigationVisible ? 'navigationWrapperVisible' : ''">
 	<img [src]="logoImgUrl" class="navigationImg" />
 	<mat-icon *ngIf="navigationVisible" (click)="onHambMenuClick()">clear</mat-icon>
-	<app-navigation [class]="navigationVisible ? 'navigation' : ''"></app-navigation>
+	<app-navigation [class]="navigationVisible ? 'navigation' : ''" (linkClicked)="onHambMenuClick()"></app-navigation>
 </div>
 <div class="rest" id="rest">
 	<router-outlet></router-outlet>

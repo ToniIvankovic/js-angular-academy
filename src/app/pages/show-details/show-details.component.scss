@@ -36,12 +36,14 @@ img{
 
 .mat-card-title {
     font-size: 40px;
+    line-height: 41px;
     font-weight: 700;
-    height: 1em;
+    min-height: 1em;
 }
 
 .showDescription {
     font-size: large;
+    padding: 0 1em;
 }
 
 .showData {
@@ -55,4 +57,19 @@ img{
 }
 app-rating{
     font-size: x-large;
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .mat-card-title {
+        font-size: 24px;
+    }
+
+    .showData{
+        display: block;
+    }
+
+    .titleRating{
+        margin: 0 0 1em 1em;
+    }
 }
