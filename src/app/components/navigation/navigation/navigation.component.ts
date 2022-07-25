@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class NavigationComponent {
 	constructor(private readonly router: Router) {}
 
-	public readonly imgSrc = '../../../../assets/logo.svg';
 	public readonly menusTop = [
 		{
 			title: 'All shows',

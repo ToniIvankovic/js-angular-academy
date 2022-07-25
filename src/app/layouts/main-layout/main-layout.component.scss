@@ -1,16 +1,108 @@
+@use "../../../styles.scss" as s;
+
 .rest{
-    position: absolute;
-    left: 25%;
-    top: 0%;
-    // width: 75vw;
-    max-width: 75vw;
-    height: 100%;
+    min-height: 100%;
+    background-color: s.$dark_purple;
 }
 
-app-navigation{
-    width: 25vw;
-    position: fixed;
-    height: 100vh;
-    left: 0;
-    top: 0;
+@media screen and (min-width: 1001px) {
+    .rest{
+        position: absolute;
+        left: 25%;
+        top: 0%;
+        width: 75%;
+        max-width: 75vw;
+        height: 100%;
+    }
+    
+    .navigationWrapper{
+        width: 25vw;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        background-color: s.$dark_purple;
+    }
+    
+    .topRibbon{
+        display: none;
+    }    
+    .navigationImg{
+        padding: 2em;
+    }
+    app-navigation{
+        display: block;
+        height: 90%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .logo{
+        min-width: 300px;
+        width: 50%;
+    }
+    .topRibbon{
+        display: flex;
+        justify-content: space-between;
+        background-color: s.$dark_purple;
+        color: white;
+        max-width: 100%;
+        padding: 2em;
+        box-sizing: border-box;
+    }
+    .hamburgerMenu{
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    app-navigation{
+        display: none;
+    }
+    .navigationWrapperVisible{
+        display: block;
+        position: fixed;
+        top: 20px;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        z-index: 3;
+        background-color: s.$purple;
+        border-radius: 24px 0 0 0;
+    }
+    .hamburgerBackground{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 2;
+    }
+    .hamburgerBackground{
+        background-color: rgba($color: black, $alpha: 0.5);
+    }
+    .navigationImg{
+        display: none;
+    }
+    .navigation{
+        display: block;
+        height: 80%;
+    }
+    .rest{
+        max-width: 100%;
+        width: 100%;
+    }
+    .mat-icon{
+        margin: 1em 0 0 80%;
+        color: white;
+        font-size: 40px;
+        min-width: fit-content;
+        min-height: fit-content;
+        height: fit-content;
+        cursor: pointer;
+    }
 }

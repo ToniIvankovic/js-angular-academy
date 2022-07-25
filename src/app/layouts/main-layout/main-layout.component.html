@@ -1,4 +1,17 @@
-<app-navigation></app-navigation>
-<div class="rest" id="rest" [style.width.px]="calcWidth()" (window:resize)="onResize()">
+<div class="topRibbon">
+	<a [routerLink]="'/'">
+		<img class="logo" [src]="logoImgUrl" />
+	</a>
+	<div class="hamburgerMenu" (click)="onHambMenuClick()">
+		<img [src]="hambMenuUrl" />
+	</div>
+</div>
+<div [class]="navigationVisible ? 'hamburgerBackground' : ''" (click)="onHambMenuClick()"></div>
+<div class="navigationWrapper" [class]="navigationVisible ? 'navigationWrapperVisible' : ''">
+	<img [src]="logoImgUrl" class="navigationImg" />
+	<mat-icon *ngIf="navigationVisible" (click)="onHambMenuClick()">clear</mat-icon>
+	<app-navigation [class]="navigationVisible ? 'navigation' : ''"></app-navigation>
+</div>
+<div class="rest" id="rest">
 	<router-outlet></router-outlet>
 </div>
