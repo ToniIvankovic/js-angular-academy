@@ -12,7 +12,7 @@
 		<img [src]="logoImgUrl" class="navigationImg" />
 	</a>
 	<mat-icon *ngIf="navigationVisible" (click)="onHambMenuClick()">clear</mat-icon>
-	<app-navigation [class]="navigationVisible ? 'navigation' : ''" (linkClicked)="onHambMenuClick()"></app-navigation>
+	<app-navigation [class]="navigationVisible ? 'navigation' : ''" (linkClicked)="closeHambMenu()"></app-navigation>
 </div>
 <div class="rest" id="rest">
 	<router-outlet></router-outlet>

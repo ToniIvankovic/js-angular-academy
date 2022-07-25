@@ -22,6 +22,10 @@ export class MainLayoutComponent {
 		this.navigationVisible = !this.navigationVisible;
 	}
 
+	public closeHambMenu() {
+		this.navigationVisible = false;
+	}
+
 	// public calcWidth() {
 	// 	return document.documentElement.clientWidth * 0.75;
 	// }
