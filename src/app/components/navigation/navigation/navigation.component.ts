@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
 	selector: 'app-navigation',
@@ -8,9 +9,8 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
 	@Output() public linkClicked = new EventEmitter();
-	constructor(private readonly router: Router) {}
 
-	public readonly menusTop = [
+	private readonly menusTopLoggedIn = [
 		{
 			title: 'All shows',
 			url: '/',
@@ -24,16 +24,40 @@ export class NavigationComponent {
 			url: '/profile',
 		},
 	];
-	public readonly menusBottom = [
+	private readonly menusBottomLoggedIn = [
 		{
 			title: 'Log out',
 			url: '/logout',
 		},
 	];
+	private readonly menusTopPublic = [
+		{
+			title: 'All shows',
+			url: '/',
+		},
+		{
+			title: 'Top-rated',
+			url: '/top-rated',
+		},
+	];
+	private readonly menusBottomPublic = [
+		{
+			title: 'Login',
+			url: '/login',
+		},
+	];
 
-	public id: string = '';
-	public findById() {
-		console.log(this.id);
+	public menusTop;
+	public menusBottom;
+
+	constructor(private readonly router: Router, private readonly authService: AuthService) {
+		if (this.authService.getCurrentUser()) {
+			this.menusTop = this.menusTopLoggedIn;
+			this.menusBottom = this.menusBottomLoggedIn;
+		} else {
+			this.menusTop = this.menusTopPublic;
+			this.menusBottom = this.menusBottomPublic;
+		}
 	}
 
 	public onClick() {

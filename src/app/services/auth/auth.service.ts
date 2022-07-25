@@ -17,8 +17,9 @@ export class AuthService {
 	public login(formData: IAuthLoginUser): Observable<IUser> {
 		return this.http.post<IUser>('https://tv-shows.infinum.academy/users/sign_in', formData);
 	}
-	public getCurrentUser(): IUser {
+	public getCurrentUser(): IUser | undefined {
 		//TODO
+		return undefined;
 		return {
 			email: 'example@example.com',
 			image_url:

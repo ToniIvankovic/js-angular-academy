@@ -40,7 +40,7 @@ export class ReviewsComponent implements OnInit {
 			rating: this.numberOfStars,
 			showId: this.showId,
 			id: this.generateNextId(),
-			user: this.authService.getCurrentUser(),
+			user: this.authService.getCurrentUser()!,
 		});
 		this.newReview.emit(newReview);
 

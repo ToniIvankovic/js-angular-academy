@@ -1,7 +1,9 @@
-<mat-card *ngIf="form" [formGroup]="form">
+<mat-card *ngIf="form" [formGroup]="form" class="card">
 	<form class="form">
 		<mat-card-title>
-			<img [src]="imgSrc" />
+			<a routerLink="/">
+				<img [src]="imgSrc" />
+			</a>
 		</mat-card-title>
 		<mat-form-field appearance="outline" class="formField">
 			<mat-icon matPrefix>person</mat-icon>

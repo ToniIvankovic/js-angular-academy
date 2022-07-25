@@ -51,3 +51,12 @@ img{
     flex-direction: column;
     justify-content: end;
 }
+
+@media screen and (max-width: 1000px) {
+    .bottomContainer{
+        font-size: x-large;
+    }
+    .menus{
+        font-size: xx-large;
+    }
+}
