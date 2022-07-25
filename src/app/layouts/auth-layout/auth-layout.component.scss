@@ -1,0 +1,13 @@
+@use "../../variables.scss" as variables;
+
+.bgnd{
+    background-color: variables.$primary_color;
+    height: 100vh;
+    width: 100vw;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

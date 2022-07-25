@@ -1,3 +1,4 @@
+@use "../../variables.scss" as variables;
 mat-form-field {
     width: 100%;
 }
@@ -5,10 +6,10 @@ mat-label{
     color: black;
 }
 button.mat-primary{
-    background-color: blueviolet;
+    background-color: variables.$secondary_color;
 }
 mat-card,input{
-    background-color: #E4C484;
+    background-color: variables.$secondary_color_accent;
 }
 .centeredComponent{
     text-align:right;

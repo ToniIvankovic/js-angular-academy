@@ -1,5 +1,5 @@
 <div class="flexbox">
-	<a *ngFor="let show of shows" [routerLink]="'/show/' + show.uuid">
+	<a *ngFor="let show of shows" [routerLink]="'/show/' + show.id">
 		<app-show-card
 			[title]="show.title"
 			[averageRating]="show.averageRating"

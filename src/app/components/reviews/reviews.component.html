@@ -1,0 +1,31 @@
+<h2>Reviews</h2>
+<div class="reviewsSection">
+	<textarea
+		id="reviewText"
+		name="reviewText"
+		type="text"
+		placeholder="Add review"
+		rows="3"
+		[(ngModel)]="reviewText"
+	></textarea>
+	<div class="ratingEntry">
+		<span class="verticallyCentered" id="addRating"> Add a rating: </span>
+		<div id="stars">
+			<img
+				*ngFor="let i of [1, 2, 3, 4, 5]"
+				id="star"
+				(mouseover)="starHover(i)"
+				(mouseleave)="starLeave()"
+				(click)="numberOfStars = i"
+				class="starAdd"
+				[src]="greyStarPath"
+			/>
+		</div>
+	</div>
+	<input id="postButton" type="button" value="Post" (click)="onButtonClick($event)" />
+	<ul class="reviewsList" *ngIf="reviews.length !== 0">
+		<li *ngFor="let review of reviews">
+			<app-single-review [review]="review" (reviewDelete)="onDeleteReview($event)"></app-single-review>
+		</li>
+	</ul>
+</div>

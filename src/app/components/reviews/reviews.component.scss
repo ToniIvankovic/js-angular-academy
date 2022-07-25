@@ -1,0 +1,90 @@
+@use "../../variables.scss" as variables;
+
+h2{
+    color: variables.$secondary_color;
+    margin-top: 2em;
+}
+
+img{
+    max-height: 400px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+}
+
+input[type="button"], .ratingEntry {
+    background-color: white;
+    color: variables.$secondary_color;
+    display: inline-block;
+    border-radius: 15px;
+    font-size: large;
+    font-weight: 500;
+}
+
+textarea {
+    resize: none;
+    font-family: inherit;
+}
+
+.reviewsSection {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    background-color: variables.$secondary_color_accent;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+
+.ratingEntry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+} 
+
+#stars {
+    display: flex;
+    justify-content: space-evenly;
+}
+.starAdd {
+    max-width: 15%;
+}
+
+#addRating{
+    min-width: 35%;
+    text-align: center;
+}
+
+.verticallyCentered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#postButton{
+    cursor: pointer;
+}

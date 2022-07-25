@@ -1,1 +1,1 @@
-<app-shows-container [shows]="shows"></app-shows-container>
+<app-shows-container [shows]="(shows$ | async) || []"></app-shows-container>
