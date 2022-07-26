@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
 import { EMPTY, filter, map, Observable, Subscription, switchMap, timer } from 'rxjs';
-import { Review } from 'src/app/services/review/review.model';
-import { Show } from 'src/app/services/show/show.model';
+import { Review } from 'src/app/models/review.model';
+import { Show } from 'src/app/models/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 const STORAGE_KEY = 'reviews';

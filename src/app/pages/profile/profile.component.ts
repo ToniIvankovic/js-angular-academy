@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IUser } from 'src/app/services/auth/user.interface';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
 	selector: 'app-profile',

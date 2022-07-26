@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Show } from 'src/app/services/show/show.model';
+import { Show } from 'src/app/models/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 @Component({

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IAuthRegisterUser } from './auth-register-user';
+import { IAuthRegisterUser } from '../../interfaces/auth-register-user.interface';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { catchError, EMPTY, map, Observable, of, tap } from 'rxjs';
-import { IUser } from './user.interface';
-import { IAuthLoginUser } from './auth-login-user';
+import { IUser } from '../../interfaces/user.interface';
+import { IAuthLoginUser } from 'src/app/interfaces/auth-login-user.interface';
 
 @Injectable({
 	providedIn: 'root',

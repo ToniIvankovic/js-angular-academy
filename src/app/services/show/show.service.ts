@@ -10,7 +10,7 @@ import {
 	of,
 	OperatorFunction,
 } from 'rxjs';
-import { Show } from './show.model';
+import { Show } from '../../models/show.model';
 
 @Injectable({
 	providedIn: 'root',

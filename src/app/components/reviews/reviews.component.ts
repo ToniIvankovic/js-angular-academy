@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { tap, timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IUser } from 'src/app/services/auth/user.interface';
-import { Review } from 'src/app/services/review/review.model';
+import { IUser } from 'src/app/interfaces/user.interface';
+import { Review } from 'src/app/models/review.model';
 
 @Component({
 	selector: 'app-reviews',
