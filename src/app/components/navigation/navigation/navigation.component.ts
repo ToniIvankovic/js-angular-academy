@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, EMPTY, firstValueFrom, tap } from 'rxjs';
+import { INavigationMenu } from 'src/app/interfaces/navigation-menu.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavigationComponent {
 	@Output() public linkClicked = new EventEmitter();
 
-	private readonly menusTopLoggedIn = [
+	private readonly menusTopLoggedIn: INavigationMenu[] = [
 		{
 			title: 'All shows',
 			url: '/',
@@ -25,13 +26,16 @@ export class NavigationComponent {
 			url: '/profile',
 		},
 	];
-	private readonly menusBottomLoggedIn = [
+	private readonly menusBottomLoggedIn: INavigationMenu[] = [
 		{
 			title: 'Log out',
-			url: '/logout',
+			sideEffect: () => {
+				this.authService.logout();
+				this.router.navigateByUrl('/login');
+			},
 		},
 	];
-	private readonly menusTopPublic = [
+	private readonly menusTopPublic: INavigationMenu[] = [
 		{
 			title: 'All shows',
 			url: '/',
@@ -41,15 +45,15 @@ export class NavigationComponent {
 			url: '/top-rated',
 		},
 	];
-	private readonly menusBottomPublic = [
+	private readonly menusBottomPublic: INavigationMenu[] = [
 		{
 			title: 'Login',
 			url: '/login',
 		},
 	];
 
-	public menusTop;
-	public menusBottom;
+	public menusTop: INavigationMenu[];
+	public menusBottom: INavigationMenu[];
 
 	constructor(private readonly router: Router, private readonly authService: AuthService) {
 		this.menusTop = this.menusTopPublic;
@@ -75,7 +79,10 @@ export class NavigationComponent {
 		// ).subscribe();
 	}
 
-	public onClick() {
+	public onClick(menu: { title: string; url?: string; sideEffect?: () => void }) {
+		if (menu.sideEffect) {
+			menu.sideEffect();
+		}
 		this.linkClicked.emit();
 	}
 }

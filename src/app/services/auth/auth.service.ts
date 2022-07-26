@@ -30,10 +30,17 @@ export class AuthService {
 	}
 
 	public getCurrentUser(): Observable<IUser | null> {
-		return this.http.get<IUser>('https://tv-shows.infinum.academy/users/me').pipe(
+		return this.http.get<any>('https://tv-shows.infinum.academy/users/me').pipe(
+			map((user) => user?.user),
 			catchError(() => {
 				return of(null);
 			}),
 		);
+	}
+
+	public logout(): void {
+		localStorage.removeItem('access-token');
+		localStorage.removeItem('client');
+		localStorage.removeItem('uid');
 	}
 }
