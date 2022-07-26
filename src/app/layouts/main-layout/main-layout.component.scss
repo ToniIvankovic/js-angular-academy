@@ -1,5 +1,8 @@
 @use "../../../styles.scss" as s;
 
+.showsAppPrint{
+    display: none;
+}
 .rest{
     min-height: 100%;
     background-color: s.$dark_purple;
@@ -105,5 +108,21 @@
         min-height: fit-content;
         height: fit-content;
         cursor: pointer;
+    }
+}
+
+@media print {
+    .navigationWrapper, .topRibbon{
+        display: none;
+    }
+    .rest{
+        width: 100%;
+        max-width: 100%;
+    }
+    .showsAppPrint{
+        display: block;
+        text-align: center;
+        font-size: xx-large;
+        margin: 0.5em 0;
     }
 }
