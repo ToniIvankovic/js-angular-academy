@@ -19,7 +19,7 @@ export class AuthService {
 			.post<any>('https://tv-shows.infinum.academy/users/sign_in', formData, { observe: 'response' })
 			.pipe(
 				tap((response) => {
-					localStorage.setItem('acces-token', response.headers.get('access-token') || '');
+					localStorage.setItem('access-token', response.headers.get('access-token') || '');
 					localStorage.setItem('client', response.headers.get('client') || '');
 					localStorage.setItem('uid', response.headers.get('uid') || '');
 				}),

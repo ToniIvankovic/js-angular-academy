@@ -12,7 +12,8 @@ import { ShowDetailsModule } from './pages/show-details/show-details.module';
 import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -31,7 +32,13 @@ import { HttpClientModule } from '@angular/common/http';
 		RegisterModule,
 		HttpClientModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			multi: true,
+			useClass: AuthInterceptor,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
