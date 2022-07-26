@@ -15,12 +15,7 @@
 					</div>
 				</div>
 			</mat-card>
-			<app-reviews
-				[reviews]="reviews"
-				(newReview)="storeNewReview($event)"
-				(deleteReview)="onDeleteReview($event)"
-				[showId]="id"
-			></app-reviews>
+			<app-reviews [reviews]="reviews$ | async" [showId]="id"></app-reviews>
 		</ng-container>
 	</div>
 </div>

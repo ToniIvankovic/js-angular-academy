@@ -29,13 +29,13 @@
 			</div>
 
 			<div class="buttonDiv">
-				<button mat-button id="postButton" (click)="onButtonClick($event)">POST</button>
+				<button mat-button id="postButton" (click)="onButtonClick()">POST</button>
 			</div>
 		</div>
 	</form>
-	<ul class="reviewsList" *ngIf="reviews.length !== 0">
+	<ul class="reviewsList" *ngIf="reviews?.length !== 0">
 		<li *ngFor="let review of reviews">
-			<app-single-review [review]="review" (reviewDelete)="onDeleteReview($event)"></app-single-review>
+			<app-single-review [review]="review"></app-single-review>
 		</li>
 	</ul>
 </div>

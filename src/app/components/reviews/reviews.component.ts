@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { tap, timer } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IUser } from 'src/app/interfaces/user.interface';
 import { Review } from 'src/app/models/review.model';
+import { ReviewService } from 'src/app/services/review/review.service';
 
 @Component({
 	selector: 'app-reviews',
@@ -16,47 +16,33 @@ export class ReviewsComponent implements OnInit {
 	private reviewStarsField: HTMLElement | null = null;
 	public reviewText: string = '';
 
-	@Input() reviews: Array<Review> = [];
+	@Input() reviews: Review[] | null = [];
 	@Input() showId: string = '';
-	@Output() newReview = new EventEmitter<Review>();
-	@Output() deleteReview = new EventEmitter<Review>();
 
-	constructor(private readonly authService: AuthService) {}
+	constructor(private readonly authService: AuthService, private readonly reviewService: ReviewService) {}
 
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
 	}
 
-	public onDeleteReview(review: Review) {
-		this.deleteReview.emit(review);
-	}
-
-	public onButtonClick(event: Event) {
+	public onButtonClick() {
+		console.log('a');
 		if (this.numberOfStars === 0) {
 			return;
 		}
-		this.authService.getCurrentUser().pipe(
-			tap((user) => {
-				if (!user) return;
-				const newReview = new Review({
-					comment: this.reviewText,
-					rating: this.numberOfStars,
-					showId: this.showId,
-					id: this.generateNextId(),
-					user: user,
-				});
-				this.newReview.emit(newReview);
-			}),
-		);
+		console.log('b');
+		const newReview = new Review({
+			comment: this.reviewText,
+			rating: this.numberOfStars,
+			show_id: this.showId,
+		});
+		this.reviewService.createReview(newReview);
 
 		this.reviewText = '';
 		this.numberOfStars = 0;
 		this.starLeave();
 	}
 
-	private generateNextId(): string {
-		return `${parseInt(this.reviews[this.reviews.length - 1]?.id || '0') + 1}`;
-	}
 	public starHover(starIndex: number): void {
 		if (!this.reviewStarsField) {
 			return;
