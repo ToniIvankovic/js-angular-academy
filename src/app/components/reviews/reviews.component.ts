@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { first, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/models/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
@@ -26,17 +26,22 @@ export class ReviewsComponent implements OnInit {
 	}
 
 	public onButtonClick() {
-		console.log('a');
 		if (this.numberOfStars === 0) {
 			return;
 		}
-		console.log('b');
 		const newReview = new Review({
 			comment: this.reviewText,
 			rating: this.numberOfStars,
 			show_id: this.showId,
 		});
 		this.reviewService.createReview(newReview);
+		this.authService
+			.getCurrentUser()
+			.pipe(first())
+			.subscribe((user) => {
+				newReview.user = user;
+				this.reviews?.unshift(newReview);
+			});
 
 		this.reviewText = '';
 		this.numberOfStars = 0;

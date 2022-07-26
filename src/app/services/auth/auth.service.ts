@@ -29,11 +29,11 @@ export class AuthService {
 			);
 	}
 
-	public getCurrentUser(): Observable<IUser | null> {
+	public getCurrentUser(): Observable<IUser | undefined> {
 		return this.http.get<any>('https://tv-shows.infinum.academy/users/me').pipe(
 			map((user) => user?.user),
 			catchError(() => {
-				return of(null);
+				return of(undefined);
 			}),
 		);
 	}
