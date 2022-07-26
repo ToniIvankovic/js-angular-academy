@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { timer } from 'rxjs';
+import { tap, timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IUser } from 'src/app/services/auth/user.interface';
 import { Review } from 'src/app/services/review/review.model';
@@ -35,14 +35,19 @@ export class ReviewsComponent implements OnInit {
 		if (this.numberOfStars === 0) {
 			return;
 		}
-		const newReview = new Review({
-			comment: this.reviewText,
-			rating: this.numberOfStars,
-			showId: this.showId,
-			id: this.generateNextId(),
-			user: this.authService.getCurrentUser()!,
-		});
-		this.newReview.emit(newReview);
+		this.authService.getCurrentUser().pipe(
+			tap((user) => {
+				if (!user) return;
+				const newReview = new Review({
+					comment: this.reviewText,
+					rating: this.numberOfStars,
+					showId: this.showId,
+					id: this.generateNextId(),
+					user: user,
+				});
+				this.newReview.emit(newReview);
+			}),
+		);
 
 		this.reviewText = '';
 		this.numberOfStars = 0;

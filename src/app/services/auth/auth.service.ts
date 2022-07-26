@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAuthRegisterUser } from './auth-register-user';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { IUser } from './user.interface';
 import { IAuthLoginUser } from './auth-login-user';
 
@@ -17,14 +17,11 @@ export class AuthService {
 	public login(formData: IAuthLoginUser): Observable<IUser> {
 		return this.http.post<IUser>('https://tv-shows.infinum.academy/users/sign_in', formData);
 	}
-	public getCurrentUser(): IUser | undefined {
-		//TODO
-		// return undefined;
-		return {
-			email: 'example@example.com',
-			image_url:
-				'https://images.ctfassets.net/hrltx12pl8hq/3AnnkVqrlhrqb9hjlMBzKX/693a8e5d40b4b6c55a7673ca4c807eef/Girl-Stock?fit=fill&w=480&h=270',
-			id: '',
-		};
+	public getCurrentUser(): Observable<IUser | null> {
+		return this.http.get<IUser>('https://tv-shows.infinum.academy/users/me').pipe(
+			catchError(() => {
+				return of(null);
+			}),
+		);
 	}
 }

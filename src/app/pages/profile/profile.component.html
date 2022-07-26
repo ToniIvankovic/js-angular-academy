@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="content" *ngIf="user">
+	<div class="content" *ngIf="user$ | async as user">
 		<p class="emailLabel">EMAIL</p>
 		<p class="emailText">{{ user.email }}</p>
 		<div class="dropPhoto" *ngIf="!user.image_url; else existingPhoto">

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, EMPTY, firstValueFrom, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -51,13 +52,27 @@ export class NavigationComponent {
 	public menusBottom;
 
 	constructor(private readonly router: Router, private readonly authService: AuthService) {
-		if (this.authService.getCurrentUser()) {
-			this.menusTop = this.menusTopLoggedIn;
-			this.menusBottom = this.menusBottomLoggedIn;
-		} else {
-			this.menusTop = this.menusTopPublic;
-			this.menusBottom = this.menusBottomPublic;
-		}
+		this.menusTop = this.menusTopPublic;
+		this.menusBottom = this.menusBottomPublic;
+		firstValueFrom(this.authService.getCurrentUser()).then((user) => {
+			if (user) {
+				this.menusTop = this.menusTopLoggedIn;
+				this.menusBottom = this.menusBottomLoggedIn;
+			}
+		});
+
+		// this.authService.getCurrentUser()
+		// .pipe(
+		// 	tap(user => {
+		// 		console.log("AAA");
+		// 		if (user) {
+		// 			this.setMenusLoggedIn();
+		// 		}
+		// 		else{
+		// 			this.setMenusPublic();
+		// 		}
+		// 	})
+		// ).subscribe();
 	}
 
 	public onClick() {
