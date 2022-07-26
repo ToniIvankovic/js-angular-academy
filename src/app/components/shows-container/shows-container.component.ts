@@ -11,7 +11,7 @@ export class ShowsContainerComponent {
 	@Input() public shows: Array<Show> = [];
 	constructor(private readonly showService: ShowService) {}
 
-	public onShowAdd(show: Show) {
-		this.showService.addNewShow(show);
-	}
+	// public onShowAdd(show: Show) {
+	// 	this.showService.addNewShow(show);
+	// }
 }
