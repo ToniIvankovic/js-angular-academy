@@ -24,6 +24,6 @@ export class ReviewService {
 		// this.http.post('https://tv-shows.infinum.academy/reviews', review);
 	}
 	public deleteReview(review: Review): void {
-		// this.http.post('https://tv-shows.infinum.academy/reviews', review);
+		this.http.delete('https://tv-shows.infinum.academy/reviews/' + review.id).subscribe();
 	}
 }

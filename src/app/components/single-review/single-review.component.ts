@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IUser } from 'src/app/interfaces/user.interface';
 import { Review } from 'src/app/models/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 
@@ -9,6 +10,9 @@ import { ReviewService } from 'src/app/services/review/review.service';
 })
 export class SingleReviewComponent {
 	@Input() review?: Review;
+	@Input() currentUser?: IUser;
+	@Output() deletedReview = new EventEmitter<Review>();
+
 	public readonly greyStarPath = '../../../assets/greyStar.png';
 	public readonly yellowStarPath = '../../../assets/yellowStar.png';
 	public readonly deleteIconPath = '../../../assets/delete.png';
@@ -26,6 +30,7 @@ export class SingleReviewComponent {
 	public onDeleteButtonClick(event: Event) {
 		if (this.review) {
 			this.reviewService.deleteReview(this.review);
+			this.deletedReview.emit(this.review);
 		}
 	}
 }

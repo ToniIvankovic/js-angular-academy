@@ -3,6 +3,7 @@ import { first, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/models/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
 	selector: 'app-reviews',
@@ -15,6 +16,7 @@ export class ReviewsComponent implements OnInit {
 	public numberOfStars = 0;
 	private reviewStarsField: HTMLElement | null = null;
 	public reviewText: string = '';
+	public user?: IUser;
 
 	@Input() reviews: Review[] | null = [];
 	@Input() showId: string = '';
@@ -23,6 +25,12 @@ export class ReviewsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
+		this.authService
+			.getCurrentUser()
+			.pipe(first())
+			.subscribe((user) => {
+				this.user = user;
+			});
 	}
 
 	public onButtonClick() {
@@ -35,17 +43,17 @@ export class ReviewsComponent implements OnInit {
 			show_id: this.showId,
 		});
 		this.reviewService.createReview(newReview);
-		this.authService
-			.getCurrentUser()
-			.pipe(first())
-			.subscribe((user) => {
-				newReview.user = user;
-				this.reviews?.unshift(newReview);
-			});
+
+		newReview.user = this.user;
+		this.reviews?.unshift(newReview);
 
 		this.reviewText = '';
 		this.numberOfStars = 0;
 		this.starLeave();
+	}
+
+	public deletedReview(review: Review) {
+		this.reviews?.splice(this.reviews.indexOf(review), 1);
 	}
 
 	public starHover(starIndex: number): void {
