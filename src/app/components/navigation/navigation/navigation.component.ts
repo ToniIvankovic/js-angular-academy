@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavigationComponent {
 	@Output() public linkClicked = new EventEmitter();
 
-	private readonly menusTopLoggedIn: INavigationMenu[] = [
+	public readonly menusTop: INavigationMenu[] = [
 		{
 			title: 'All shows',
 			url: '/',
@@ -26,7 +26,7 @@ export class NavigationComponent {
 			url: '/profile',
 		},
 	];
-	private readonly menusBottomLoggedIn: INavigationMenu[] = [
+	public readonly menusBottom: INavigationMenu[] = [
 		{
 			title: 'Log out',
 			sideEffect: () => {
@@ -35,36 +35,14 @@ export class NavigationComponent {
 			},
 		},
 	];
-	private readonly menusTopPublic: INavigationMenu[] = [
-		{
-			title: 'All shows',
-			url: '/',
-		},
-		{
-			title: 'Top-rated',
-			url: '/top-rated',
-		},
-	];
-	private readonly menusBottomPublic: INavigationMenu[] = [
-		{
-			title: 'Login',
-			url: '/login',
-		},
-	];
-
-	public menusTop: INavigationMenu[];
-	public menusBottom: INavigationMenu[];
 
 	constructor(private readonly router: Router, private readonly authService: AuthService) {
-		this.menusTop = this.menusTopPublic;
-		this.menusBottom = this.menusBottomPublic;
-		firstValueFrom(this.authService.getCurrentUser()).then((user) => {
-			if (user) {
-				this.menusTop = this.menusTopLoggedIn;
-				this.menusBottom = this.menusBottomLoggedIn;
-			}
-		});
-
+		// firstValueFrom(this.authService.getCurrentUser()).then((user) => {
+		// 	if (user) {
+		// 		this.menusTop = this.menusTopLoggedIn;
+		// 		this.menusBottom = this.menusBottomLoggedIn;
+		// 	}
+		// });
 		// this.authService.getCurrentUser()
 		// .pipe(
 		// 	tap(user => {
