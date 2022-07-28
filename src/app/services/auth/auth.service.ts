@@ -16,7 +16,7 @@ export class AuthService {
 	}
 	public login(formData: IAuthLoginUser): Observable<IUser> {
 		return this.http
-			.post<any>('https://tv-shows.infinum.academy/users/sign_in', formData, { observe: 'response' })
+			.post<{ user: IUser }>('https://tv-shows.infinum.academy/users/sign_in', formData, { observe: 'response' })
 			.pipe(
 				tap((response) => {
 					localStorage.setItem('access-token', response.headers.get('access-token') || '');
@@ -24,14 +24,14 @@ export class AuthService {
 					localStorage.setItem('uid', response.headers.get('uid') || '');
 				}),
 				map((response) => {
-					return response.body['user'];
+					return response.body!.user;
 				}),
 			);
 	}
 
 	public getCurrentUser(): Observable<IUser | undefined> {
-		return this.http.get<any>('https://tv-shows.infinum.academy/users/me').pipe(
-			map((user) => user?.user),
+		return this.http.get<{ user: IUser }>('https://tv-shows.infinum.academy/users/me').pipe(
+			map((user) => user.user),
 			catchError(() => {
 				return of(undefined);
 			}),
