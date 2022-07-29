@@ -1,18 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-	BehaviorSubject,
-	delay,
-	filter,
-	firstValueFrom,
-	map,
-	MonoTypeOperatorFunction,
-	observable,
-	Observable,
-	of,
-	OperatorFunction,
-	tap,
-} from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IShow } from 'src/app/interfaces/show.interface';
 import { Show } from '../../models/show.model';
 

@@ -9,8 +9,26 @@ import { IUser } from 'src/app/interfaces/user.interface';
 	styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-	public user$?: Observable<IUser | null>;
+	public user$?: Observable<IUser | undefined>;
 	constructor(private readonly authService: AuthService) {
-		this.user$ = authService.getCurrentUser().pipe(tap(console.log));
+		this.user$ = authService.getCurrentUser();
+	}
+
+	public onFileDrop(event: DragEvent) {
+		event.preventDefault();
+		this.emitFile(event.dataTransfer?.files[0]);
+	}
+
+	public onDragOver(event: DragEvent) {
+		event.preventDefault();
+	}
+
+	public onFileInputChange(event: Event) {
+		const inputElement = event.target as HTMLInputElement;
+		this.emitFile((inputElement.files as FileList)[0]);
+	}
+
+	private emitFile(file: File | undefined) {
+		console.log(file);
 	}
 }
