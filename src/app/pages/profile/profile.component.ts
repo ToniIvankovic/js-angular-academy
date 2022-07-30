@@ -13,6 +13,7 @@ export class ProfileComponent {
 	public user$?: Observable<IUser | undefined>;
 	public selectedPhoto: boolean = false;
 	private file?: File;
+	public uploadedImageUrl?: string;
 
 	constructor(private readonly authService: AuthService, private readonly userService: UserService) {
 		this.user$ = authService.getCurrentUser();
@@ -35,6 +36,20 @@ export class ProfileComponent {
 	private prepareFileForUpload(file: File | undefined) {
 		this.selectedPhoto = true;
 		this.file = file;
+
+		if (file) {
+			const reader = new FileReader();
+			reader.addEventListener(
+				'load',
+				() => {
+					this.uploadedImageUrl = reader.result as string;
+				},
+				false,
+			);
+
+			reader.readAsDataURL(file);
+		}
+
 		console.log(file);
 	}
 
@@ -44,5 +59,9 @@ export class ProfileComponent {
 			console.log(user);
 			this.userService.updateUserImage(user!, this.file!);
 		});
+	}
+
+	public onClearClick() {
+		this.selectedPhoto = false;
 	}
 }
