@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
-import { EMPTY, filter, map, Observable, Subscription, switchMap, timer } from 'rxjs';
+import { EMPTY, filter, map, Observable, Subscription, switchMap, tap, timer } from 'rxjs';
 import { Review } from 'src/app/models/review.model';
 import { Show } from 'src/app/models/show.model';
 import { ReviewService } from 'src/app/services/review/review.service';
@@ -15,34 +15,33 @@ const STORAGE_KEY = 'reviews';
 })
 export class ShowDetailsComponent implements OnDestroy {
 	public reviews$?: Observable<Review[]>;
-	private allReviews: Array<Review> = [];
 	public show$: Observable<Show | undefined>;
 	private subscription?: Subscription;
+	public id$: Observable<string>;
+
 	constructor(
 		private readonly showService: ShowService,
 		private readonly route: ActivatedRoute,
 		private readonly router: Router,
 		private readonly reviewService: ReviewService,
 	) {
-		this.show$ = this.route.paramMap.pipe(
+		this.id$ = this.route.paramMap.pipe(
 			map((parammap) => parammap.get('id')),
+			filter((id) => !!id),
+		) as Observable<string>;
+		this.reviews$ = this.id$.pipe(
 			switchMap((id) => {
-				if (!id) {
-					return EMPTY;
-				}
+				return this.reviewService.getReviews(id);
+			}),
+		);
+		this.show$ = this.id$.pipe(
+			switchMap((id) => {
 				return showService.fetchById(id); //pretvori u str
 			}),
 		);
-		this.subscription = this.show$.subscribe((show) => {
-			this.id = show?.id || '';
-			this.allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-			this.reviews$ = this.reviewService.getReviews(this.id);
-		});
 	}
 
 	ngOnDestroy(): void {
 		this.subscription?.unsubscribe();
 	}
-
-	public id: string = '';
 }

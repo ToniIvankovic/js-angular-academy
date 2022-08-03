@@ -15,7 +15,7 @@
 					</div>
 				</div>
 			</mat-card>
-			<app-reviews [reviews]="reviews$ | async" [showId]="id"></app-reviews>
 		</ng-container>
+		<app-reviews *ngIf="id$ | async as id" [reviews]="reviews$ | async" [showId]="id"></app-reviews>
 	</div>
 </div>
