@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnonymousGuard } from './guards/anonymous.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AllShowsComponent } from './pages/all-shows/all-shows.component';
@@ -14,6 +16,7 @@ const routes: Routes = [
 	{
 		path: '',
 		component: MainLayoutComponent,
+		canActivate: [AuthGuard],
 		children: [
 			{
 				path: '',
@@ -36,6 +39,7 @@ const routes: Routes = [
 	{
 		path: '',
 		component: AuthLayoutComponent,
+		canActivate: [AnonymousGuard],
 		children: [
 			{
 				path: 'login',

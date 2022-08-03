@@ -6,13 +6,18 @@
 			[routerLink]="menu.url"
 			[routerLinkActive]="'active'"
 			[routerLinkActiveOptions]="{ exact: true }"
-			(click)="onClick()"
+			(click)="onClick(menu)"
 		>
 			{{ menu.title }}
 		</a>
 	</div>
 	<div class="bottomContainer">
-		<a class="menu" *ngFor="let menu of menusBottom" [routerLink]="menu.url" (click)="onClick()">
+		<a
+			class="menu"
+			*ngFor="let menu of menusBottom"
+			[routerLink]="menu.url ? menu.url : null"
+			(click)="onClick(menu)"
+		>
 			{{ menu.title }}
 		</a>
 	</div>

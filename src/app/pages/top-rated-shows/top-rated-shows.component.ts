@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Show } from 'src/app/services/show/show.model';
+import { Show } from 'src/app/models/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 @Component({

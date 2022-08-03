@@ -1,4 +1,4 @@
-import { IUser } from '../auth/user.interface';
+import { IUser } from './user.interface';
 
 export interface IReview {
 	id: string;
