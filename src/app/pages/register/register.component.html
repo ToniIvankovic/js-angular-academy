@@ -1,27 +1,67 @@
-<mat-card *ngIf="form" [formGroup]="form">
-	<form>
-		<mat-card-title>Register</mat-card-title>
-		<mat-form-field>
+<mat-card *ngIf="form" [formGroup]="form" class="card">
+	<form class="form">
+		<mat-card-title>
+			<a routerLink="/">
+				<img [src]="imgSrc" />
+			</a>
+		</mat-card-title>
+		<mat-form-field appearance="outline" class="formField">
+			<mat-icon matPrefix>person</mat-icon>
 			<mat-label>Email</mat-label>
 			<input matInput type="email" placeholder="jane.doe@gmail.com" formControlName="email" />
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['email']">
+				Invalid email address format
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['required']">
+				Email address required
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['existing']">
+				Email already taken
+			</mat-hint>
 		</mat-form-field>
-		<mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-icon matPrefix>lock</mat-icon>
 			<mat-label>Password</mat-label>
-			<input matInput type="password" placeholder="********" formControlName="password" />
+			<input
+				matInput
+				type="password"
+				placeholder="********"
+				formControlName="password"
+				(change)="inputChanged()"
+				(blur)="passBlur()"
+			/>
+
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['minlength']">
+				Minimum password length is 8 characters
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['required']">
+				Password is required
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['match']">
+				{{ passwordErrors['match'] }}
+			</mat-hint>
 		</mat-form-field>
-		<mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-icon matPrefix>lock</mat-icon>
 			<mat-label>Repeat password</mat-label>
-			<input matInput type="password" placeholder="********" formControlName="password2" />
+			<input
+				matInput
+				type="password"
+				placeholder="********"
+				formControlName="password2"
+				(change)="inputChanged()"
+				(blur)="passBlur()"
+			/>
+			<mat-hint *ngIf="form.controls['password'].touched && password2Errors && password2Errors['match']">
+				{{ password2Errors['match'] }}
+			</mat-hint>
 		</mat-form-field>
-		<ng-container *ngIf="errors.length !== 0">
-			<p class="error" *ngFor="let error of errors">
-				{{ error }}
-			</p>
-		</ng-container>
+
+		<button mat-raised-button type="submit" (click)="onSignUpClick($event)">SIGN UP</button>
 		<p>
 			Already have an account?
-			<a routerLink="/login">Log in</a>
+			<a routerLink="/login">Login</a>
 		</p>
-		<button mat-raised-button type="submit" (click)="onSignUpClick($event)">Sign up</button>
 	</form>
 </mat-card>

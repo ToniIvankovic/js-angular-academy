@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 a{
     display: inline;
     width: max-content;
-    margin: 1em 5% 1em 5%;
+    margin: 1em;
     text-decoration: none;
     color: unset;
 }
@@ -16,5 +16,25 @@ app-show-card{
     cursor: pointer;
     display: block;
     box-sizing: border-box;
-    width: 300px;
+    width: 240px;
+}
+
+@media screen and (max-width: 600px) {
+    .flexbox{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
+    a{
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        color: unset;
+    }
+    app-show-card{
+        width: 100%;
+    }
 }

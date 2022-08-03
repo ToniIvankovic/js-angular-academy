@@ -17,4 +17,14 @@ export class AuthService {
 	public login(formData: IAuthLoginUser): Observable<IUser> {
 		return this.http.post<IUser>('https://tv-shows.infinum.academy/users/sign_in', formData);
 	}
+	public getCurrentUser(): IUser | undefined {
+		//TODO
+		// return undefined;
+		return {
+			email: 'example@example.com',
+			image_url:
+				'https://images.ctfassets.net/hrltx12pl8hq/3AnnkVqrlhrqb9hjlMBzKX/693a8e5d40b4b6c55a7673ca4c807eef/Girl-Stock?fit=fill&w=480&h=270',
+			id: '',
+		};
+	}
 }

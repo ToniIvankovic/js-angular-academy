@@ -1,57 +1,62 @@
-@use "../../../variables.scss" as variables;
+@use "../../../../styles.scss" as s;
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
 a{
     text-decoration: none;
     color: unset;
 }
 .bgnd-secondary{
-    background-color: variables.$secondary_color;
+    // background-color: s.$dark_purple;
     color: white;
     font-weight: 500;
-    min-width: 750px;
-}
-.menus{
-    display: inline-block;
-    width: 70%;
     height: 100%;
+}
+
+.menus{
+    margin: 3em 10%;
+    font-weight: 400;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+img{
+    max-width: 60%;
+    margin: 1em;
 }
 .menu{
-    display: inline-block;
-    min-width: 200px;
-    min-height: 100%;
-    padding: 1em 0;
-    font-size: x-large;
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
     text-align: center;
-    border: 1px solid black;
-    border-left: none;
+    border-radius: 30px;
+    display: block;
+    width:fit-content;
     cursor: pointer;
-}
-.finder{
-    display: inline-block;
-    width: 30%;
-    height: 100%;
-}
-.right{
-    margin: 0 1em;
-    box-sizing: border-box;
-    justify-self: flex-end;
-    text-align: right;
-}
-mat-form-field{
-    margin: 0 1em;
 }
 
 .active{
-    background-color: variables.$secondary_color_accent;
+    background-color: s.$purple;
     color: white;
 }
-.mat-btn{
-    background-color: variables.$primary_color;
-    color: black;
-}
-mat-form-field{
-    max-width: 50%;
+
+.bottomContainer{
+    margin: 3em 10%;
+    font-weight: 400;
+    font-size: large;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }
 
-input, mat-label{
-    color: variables.$primary_color;
+@media screen and (max-width: 1000px) {
+    .bottomContainer{
+        font-size: x-large;
+    }
+    .menus{
+        font-size: xx-large;
+    }
 }

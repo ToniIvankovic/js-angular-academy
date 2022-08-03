@@ -18,6 +18,7 @@ export class LoginComponent {
 		});
 	}
 
+	public imgSrc = '../../../assets/logo.svg';
 	public form: FormGroup;
 
 	public get emailErrors() {
@@ -28,14 +29,10 @@ export class LoginComponent {
 		return this.form.controls['password'].errors;
 	}
 
-	public errors: string[] = [];
-
 	public onLoginClick(event: Event) {
-		this.errors = [];
 		event.preventDefault();
 
-		this.checkForErrors();
-		if (this.errors.length !== 0) {
+		if (this.form.invalid) {
 			return;
 		}
 
@@ -51,32 +48,25 @@ export class LoginComponent {
 			});
 	}
 
-	private checkForErrors() {
-		if (this.emailErrors || this.passwordErrors) {
-			// this.errors = of(["A"]).pipe(delay(500));
-			if (this.emailErrors) {
-				if (this.emailErrors['email']) {
-					this.errors.push('Invalid email address format');
-				} else if (this.emailErrors['required']) {
-					this.errors.push('Email address required');
-				} else {
-					this.errors.push('Email address problem');
-				}
-			}
-			if (this.passwordErrors) {
-				if (this.passwordErrors['minlength']) {
-					this.errors.push('Password is too short - minimum length is 8 characters');
-				} else if (this.passwordErrors['required']) {
-					this.errors.push('Password is required');
-				} else {
-					this.errors.push('Password problem');
-				}
-			}
+	private invalidCredentials: boolean = false;
+	public inputChanged() {
+		if (this.invalidCredentials) {
+			this.form.controls['email'].setErrors(null);
+			this.form.controls['password'].setErrors(null);
+			this.invalidCredentials = false;
 		}
 	}
 
 	private handleErrorResponse(error: HttpErrorResponse) {
-		this.errors = error.error.errors;
+		console.log(error.error.errors);
+		this.invalidCredentials = true;
+		this.form.controls['email'].setErrors({
+			credentials: 'Incorrect credentials',
+		});
+		this.form.controls['password'].setErrors({
+			credentials: 'Incorrect credentials',
+		});
+		console.log(this.form.controls['password'].errors);
 		return EMPTY;
 	}
 }

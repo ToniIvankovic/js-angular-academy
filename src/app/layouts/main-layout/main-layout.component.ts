@@ -7,4 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayoutComponent {
 	constructor() {}
+
+	// ngOnInit(): void {
+	// 	this.onResize();
+	// }
+
+	public navigationVisible = false;
+
+	public readonly logoImgUrl = '../../../assets/logo.svg';
+	public readonly hambMenuUrl =
+		'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/1024px-Hamburger_icon_white.svg.png';
+
+	public onHambMenuClick() {
+		this.navigationVisible = !this.navigationVisible;
+	}
+
+	public closeHambMenu() {
+		this.navigationVisible = false;
+	}
+
+	// public calcWidth() {
+	// 	return document.documentElement.clientWidth * 0.75;
+	// }
+
+	// public onResize() {
+	// 	const newWidth = this.calcWidth();
+	// 	const rest = document.getElementById('rest')!;
+	// 	if(newWidth < 738){
+	// 		rest.style.width = "";
+	// 		return;
+	// 	}
+	// 	// rest.style.width = newWidth + 'px';
+	// }
 }

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { timer } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { IUser } from 'src/app/services/auth/user.interface';
 import { Review } from 'src/app/services/review/review.model';
 
 @Component({
@@ -19,6 +21,8 @@ export class ReviewsComponent implements OnInit {
 	@Output() newReview = new EventEmitter<Review>();
 	@Output() deleteReview = new EventEmitter<Review>();
 
+	constructor(private readonly authService: AuthService) {}
+
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
 	}
@@ -28,11 +32,15 @@ export class ReviewsComponent implements OnInit {
 	}
 
 	public onButtonClick(event: Event) {
+		if (this.numberOfStars === 0) {
+			return;
+		}
 		const newReview = new Review({
 			comment: this.reviewText,
 			rating: this.numberOfStars,
 			showId: this.showId,
 			id: this.generateNextId(),
+			user: this.authService.getCurrentUser()!,
 		});
 		this.newReview.emit(newReview);
 
@@ -51,9 +59,13 @@ export class ReviewsComponent implements OnInit {
 		let newCounter = 1;
 		for (let otherStar of this.reviewStarsField.children) {
 			if (newCounter > starIndex) {
-				otherStar.setAttribute('src', this.greyStarPath);
+				otherStar.innerHTML = 'star_border';
+				otherStar.classList.add('colorStar');
+				otherStar.classList.remove('whiteStar');
 			} else {
-				otherStar.setAttribute('src', this.yellowStarPath);
+				otherStar.innerHTML = 'star';
+				otherStar.classList.add('whiteStar');
+				otherStar.classList.remove('colorStar');
 			}
 			newCounter++;
 		}
@@ -64,11 +76,15 @@ export class ReviewsComponent implements OnInit {
 			return;
 		}
 		let starIndex = 1;
-		for (let star of this.reviewStarsField.children) {
+		for (let otherStar of this.reviewStarsField.children) {
 			if (this.numberOfStars === 0 || starIndex > this.numberOfStars) {
-				star.setAttribute('src', this.greyStarPath);
+				otherStar.innerHTML = 'star_border';
+				otherStar.classList.add('colorStar');
+				otherStar.classList.remove('whiteStar');
 			} else {
-				star.setAttribute('src', this.yellowStarPath);
+				otherStar.innerHTML = 'star';
+				otherStar.classList.add('whiteStar');
+				otherStar.classList.remove('colorStar');
 			}
 			starIndex++;
 		}

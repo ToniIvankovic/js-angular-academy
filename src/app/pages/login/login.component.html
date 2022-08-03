@@ -1,23 +1,55 @@
-<mat-card *ngIf="form" [formGroup]="form">
-	<form>
-		<mat-card-title>Login</mat-card-title>
-		<mat-form-field>
+<mat-card *ngIf="form" [formGroup]="form" class="card">
+	<form class="form">
+		<mat-card-title>
+			<a routerLink="/">
+				<img [src]="imgSrc" />
+			</a>
+		</mat-card-title>
+		<mat-form-field appearance="outline" class="formField">
+			<mat-icon matPrefix>person</mat-icon>
 			<mat-label>Email</mat-label>
-			<input matInput type="email" placeholder="jane.doe@gmail.com" formControlName="email" />
+			<input
+				matInput
+				type="email"
+				placeholder="jane.doe@gmail.com"
+				formControlName="email"
+				(change)="inputChanged()"
+			/>
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['email']">
+				Invalid email address format
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['required']">
+				Email address required
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['email'].touched && emailErrors && emailErrors['credentials']">
+				{{ emailErrors['credentials'] }}
+			</mat-hint>
 		</mat-form-field>
-		<mat-form-field>
+		<mat-form-field appearance="outline">
+			<mat-icon matPrefix>lock</mat-icon>
 			<mat-label>Password</mat-label>
-			<input matInput type="password" placeholder="********" formControlName="password" />
+			<input
+				matInput
+				type="password"
+				placeholder="********"
+				formControlName="password"
+				(change)="inputChanged()"
+			/>
+
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['minlength']">
+				Minimum password length is 8 characters
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['required']">
+				Password is required
+			</mat-hint>
+			<mat-hint *ngIf="form.controls['password'].touched && passwordErrors && passwordErrors['credentials']">
+				{{ passwordErrors['credentials'] }}
+			</mat-hint>
 		</mat-form-field>
-		<ng-container *ngIf="errors.length !== 0">
-			<p class="error" *ngFor="let error of errors">
-				{{ error }}
-			</p>
-		</ng-container>
+		<button mat-raised-button type="submit" (click)="onLoginClick($event)">LOG IN</button>
 		<p>
 			Don't have an account yet?
-			<a routerLink="/register">Sign up</a>
+			<a routerLink="/register">Register</a>
 		</p>
-		<button mat-raised-button type="submit" (click)="onLoginClick($event)">Login</button>
 	</form>
 </mat-card>

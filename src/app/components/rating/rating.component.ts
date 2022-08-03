@@ -18,7 +18,7 @@ export class RatingComponent implements OnInit {
 		if (!this.avgRating) {
 			this.ratingText = 'No ratings';
 		} else {
-			this.ratingText = `${this.avgRating}`;
+			this.ratingText = `${this.avgRating}/5`;
 		}
 	}
 

@@ -1,49 +1,75 @@
-@use "../../variables.scss" as variables;
+@use "../../../styles.scss" as s;
+
+//Zašto ne radi :host{ background_color: s.$dark_purple} ?
+
 .bgnd {
-    background-color: variables.$primary_color;
-    background-size: 20%;
+    background-color: s.$dark_purple;
     color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    // height: 100%;
     min-height: 100%; //Bez paddinga ne radi dobro s developer toolsima - kako napraviti height=max(100%, max-content)?
     width: 100%;
-    padding: 3em 0 7em 0;
 }
 
 
 .app {
-    max-width: 600px;
+    width: 100%;
     min-width: 400px;
     margin: auto;
+    padding-bottom: 5em;
 }
 
-.showCard{
-    width: 100%;
-}
-
-.showImage img{
-    max-height: 400px;
+img{
+    max-height: 450px;
     object-fit: cover;
     width: 100%;
     border-radius: 15px 15px 0px 0px;
 }
 
-.showCard {
+.mat-card{
+    margin: 2em;
+    padding: 0;
+    width: calc(100% - 4em);
     background-color: white;
-    color: variables.$secondary_color;
+    color: s.$purple;
     display: inline-block;
     border-radius: 15px;
 }
 
-.showTitle {
-    font-size: large;
+.mat-card-title {
+    font-size: 40px;
+    line-height: 41px;
     font-weight: 700;
+    min-height: 1em;
 }
 
 .showDescription {
-    font-size: small;
+    font-size: large;
+    padding: 0 1em;
 }
 
 .showData {
-    padding: 15px;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.titleRating{
+    height: fit-content;
+}
+app-rating{
+    font-size: x-large;
+}
+
+@media screen and (max-width: 1000px) {
+    
+    .mat-card-title {
+        font-size: 24px;
+    }
+
+    .showData{
+        display: block;
+    }
+
+    .titleRating{
+        margin: 0 0 1em 1em;
+    }
 }

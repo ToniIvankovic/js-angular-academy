@@ -4,6 +4,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AllShowsComponent } from './pages/all-shows/all-shows.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileModule } from './pages/profile/profile.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { ShowDetailsComponent } from './pages/show-details/show-details.component';
 import { TopRatedShowsComponent } from './pages/top-rated-shows/top-rated-shows.component';
@@ -24,6 +26,10 @@ const routes: Routes = [
 			{
 				path: 'show/:id',
 				component: ShowDetailsComponent,
+			},
+			{
+				path: 'profile',
+				component: ProfileComponent,
 			},
 		],
 	},
@@ -48,7 +54,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes), ProfileModule],
 	exports: [RouterModule],
 })
 export class AppRoutingModule {}

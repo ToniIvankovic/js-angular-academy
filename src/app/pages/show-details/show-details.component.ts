@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivationEnd, Event, NavigationEnd, Router } from '@angular/router';
-import { EMPTY, filter, map, Observable, switchMap, timer } from 'rxjs';
+import { EMPTY, filter, map, Observable, Subscription, switchMap, timer } from 'rxjs';
 import { Review } from 'src/app/services/review/review.model';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
@@ -12,11 +12,11 @@ const STORAGE_KEY = 'reviews';
 	templateUrl: './show-details.component.html',
 	styleUrls: ['./show-details.component.scss'],
 })
-export class ShowDetailsComponent implements OnInit {
+export class ShowDetailsComponent implements OnInit, OnDestroy {
 	public reviews: Array<Review> = [];
 	private allReviews: Array<Review> = [];
 	public show$: Observable<Show | undefined>;
-
+	private subscription?: Subscription;
 	constructor(
 		private readonly showService: ShowService,
 		private readonly route: ActivatedRoute,
@@ -31,11 +31,22 @@ export class ShowDetailsComponent implements OnInit {
 				return showService.fetchById(id); //pretvori u str
 			}),
 		);
+		this.subscription = this.show$.subscribe((show) => {
+			this.id = show?.id || '';
+			this.allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+			this.findReviewsForShow(this.id);
+		});
+	}
+
+	ngOnDestroy(): void {
+		this.subscription?.unsubscribe();
 	}
 
 	ngOnInit(): void {
-		this.allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-		this.findReviewsForShow(this.id);
+		return;
+		// this.allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+		// this.findReviewsForShow(this.id);
+		// console.log(this.id);
 	}
 
 	private findReviewsForShow(id: string): void {
