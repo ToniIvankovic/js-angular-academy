@@ -10,7 +10,7 @@
 		</ng-template>
 	</div>
 	<div class="flexBetween">
-		<div>{{ review!.user.email }}</div>
+		<div>{{ review!.user!.email }}</div>
 		<div class="scoreContainer">
 			<div class="reviewScore numberRating">{{ review!.rating }}/5</div>
 			<div class="starsContainer">
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<p>{{ review!.comment }}</p>
-	<div class="deleteIconDiv verticallyCentered">
+	<div class="deleteIconDiv verticallyCentered" *ngIf="currentUser?.id === review?.user?.id">
 		<mat-icon class="deleteIcon" (click)="onDeleteButtonClick($event)">delete_outline</mat-icon>
 		<!-- <img [src]="deleteIconPath" class="deleteIcon" (click)="onDeleteButtonClick($event)" /> -->
 	</div>
