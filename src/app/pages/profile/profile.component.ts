@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IUser } from 'src/app/services/auth/user.interface';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
 	selector: 'app-profile',
@@ -8,8 +9,8 @@ import { IUser } from 'src/app/services/auth/user.interface';
 	styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-	public user?: IUser;
+	public user$?: Observable<IUser | null>;
 	constructor(private readonly authService: AuthService) {
-		this.user = authService.getCurrentUser();
+		this.user$ = authService.getCurrentUser().pipe(tap(console.log));
 	}
 }

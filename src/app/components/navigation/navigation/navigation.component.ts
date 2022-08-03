@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, EMPTY, firstValueFrom, tap } from 'rxjs';
+import { INavigationMenu } from 'src/app/interfaces/navigation-menu.interface';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavigationComponent {
 	@Output() public linkClicked = new EventEmitter();
 
-	private readonly menusTopLoggedIn = [
+	public readonly menusTop: INavigationMenu[] = [
 		{
 			title: 'All shows',
 			url: '/',
@@ -24,43 +26,41 @@ export class NavigationComponent {
 			url: '/profile',
 		},
 	];
-	private readonly menusBottomLoggedIn = [
+	public readonly menusBottom: INavigationMenu[] = [
 		{
 			title: 'Log out',
-			url: '/logout',
+			sideEffect: () => {
+				this.authService.logout();
+				this.router.navigateByUrl('/login');
+			},
 		},
 	];
-	private readonly menusTopPublic = [
-		{
-			title: 'All shows',
-			url: '/',
-		},
-		{
-			title: 'Top-rated',
-			url: '/top-rated',
-		},
-	];
-	private readonly menusBottomPublic = [
-		{
-			title: 'Login',
-			url: '/login',
-		},
-	];
-
-	public menusTop;
-	public menusBottom;
 
 	constructor(private readonly router: Router, private readonly authService: AuthService) {
-		if (this.authService.getCurrentUser()) {
-			this.menusTop = this.menusTopLoggedIn;
-			this.menusBottom = this.menusBottomLoggedIn;
-		} else {
-			this.menusTop = this.menusTopPublic;
-			this.menusBottom = this.menusBottomPublic;
-		}
+		// firstValueFrom(this.authService.getCurrentUser()).then((user) => {
+		// 	if (user) {
+		// 		this.menusTop = this.menusTopLoggedIn;
+		// 		this.menusBottom = this.menusBottomLoggedIn;
+		// 	}
+		// });
+		// this.authService.getCurrentUser()
+		// .pipe(
+		// 	tap(user => {
+		// 		console.log("AAA");
+		// 		if (user) {
+		// 			this.setMenusLoggedIn();
+		// 		}
+		// 		else{
+		// 			this.setMenusPublic();
+		// 		}
+		// 	})
+		// ).subscribe();
 	}
 
-	public onClick() {
+	public onClick(menu: { title: string; url?: string; sideEffect?: () => void }) {
+		if (menu.sideEffect) {
+			menu.sideEffect();
+		}
 		this.linkClicked.emit();
 	}
 }

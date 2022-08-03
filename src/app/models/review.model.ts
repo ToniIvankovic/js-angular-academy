@@ -1,5 +1,5 @@
-import { IUser } from '../auth/user.interface';
-import { IReview } from './review.interface';
+import { IUser } from '../interfaces/user.interface';
+import { IReview } from '../interfaces/review.interface';
 
 export class Review {
 	public id: string;

@@ -1,4 +1,4 @@
-import { IShow } from './show.interface';
+import { IShow } from '../interfaces/show.interface';
 export class Show {
 	public id: string;
 	public title: string;

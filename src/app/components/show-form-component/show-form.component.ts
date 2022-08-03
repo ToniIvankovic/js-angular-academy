@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Show } from 'src/app/services/show/show.model';
+import { Show } from 'src/app/models/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class ShowFormComponent {
 
 	public onSubmit() {
 		const newShow = new Show({
-			id: this.showService.nextId,
+			id: '',
 			title: this.showName,
 			description: this.description,
 			average_rating: null,
