@@ -71,7 +71,8 @@
 }
 
 .existingPhotoInner{
-    >*{
+    position: relative;
+    >img,>button{
         margin-inline: auto;
         display: block;
         margin-block: 2em;
@@ -98,8 +99,16 @@ input[type="file"]{
 
 label{
     display: block;
+    cursor: pointer;
 }
 
 button{
     margin: 1em;
+}
+
+mat-icon.deleteImage{
+    position: absolute;
+    margin: 0;
+    right: 150px;
+    cursor: pointer;
 }
