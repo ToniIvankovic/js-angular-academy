@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { tap, timer } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { first, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IUser } from 'src/app/interfaces/user.interface';
 import { Review } from 'src/app/models/review.model';
+import { ReviewService } from 'src/app/services/review/review.service';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
 	selector: 'app-reviews',
@@ -15,48 +16,46 @@ export class ReviewsComponent implements OnInit {
 	public numberOfStars = 0;
 	private reviewStarsField: HTMLElement | null = null;
 	public reviewText: string = '';
+	public user?: IUser;
 
-	@Input() reviews: Array<Review> = [];
+	@Input() reviews: Review[] | null = [];
 	@Input() showId: string = '';
-	@Output() newReview = new EventEmitter<Review>();
-	@Output() deleteReview = new EventEmitter<Review>();
 
-	constructor(private readonly authService: AuthService) {}
+	constructor(private readonly authService: AuthService, private readonly reviewService: ReviewService) {}
 
 	ngOnInit(): void {
 		this.reviewStarsField = document.querySelector('#stars');
+		this.authService
+			.getCurrentUser()
+			.pipe(first())
+			.subscribe((user) => {
+				this.user = user;
+			});
 	}
 
-	public onDeleteReview(review: Review) {
-		this.deleteReview.emit(review);
-	}
-
-	public onButtonClick(event: Event) {
+	public onButtonClick() {
 		if (this.numberOfStars === 0) {
 			return;
 		}
-		this.authService.getCurrentUser().pipe(
-			tap((user) => {
-				if (!user) return;
-				const newReview = new Review({
-					comment: this.reviewText,
-					rating: this.numberOfStars,
-					showId: this.showId,
-					id: this.generateNextId(),
-					user: user,
-				});
-				this.newReview.emit(newReview);
-			}),
-		);
+		const newReview = new Review({
+			comment: this.reviewText,
+			rating: this.numberOfStars,
+			show_id: this.showId,
+		});
+		this.reviewService.createReview(newReview);
+
+		newReview.user = this.user;
+		this.reviews?.unshift(newReview);
 
 		this.reviewText = '';
 		this.numberOfStars = 0;
 		this.starLeave();
 	}
 
-	private generateNextId(): string {
-		return `${parseInt(this.reviews[this.reviews.length - 1]?.id || '0') + 1}`;
+	public deletedReview(review: Review) {
+		this.reviews?.splice(this.reviews.indexOf(review), 1);
 	}
+
 	public starHover(starIndex: number): void {
 		if (!this.reviewStarsField) {
 			return;
