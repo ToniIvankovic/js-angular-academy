@@ -1,5 +1,5 @@
 <mat-card>
 	<img mat-card-image [src]="imageUrl || placeholderURL" (error)="switchLink($event)" />
-	<mat-card-title>{{ title }}</mat-card-title>
+	<mat-card-title>{{ title | capitalize }}</mat-card-title>
 	<mat-card-subtitle> <app-rating [avgRating]="averageRating"></app-rating> </mat-card-subtitle>
 </mat-card>

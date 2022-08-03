@@ -2,34 +2,43 @@
 	<div class="content" *ngIf="user$ | async as user">
 		<p class="emailLabel">EMAIL</p>
 		<p class="emailText">{{ user.email }}</p>
-		<label for="photo-upload" class="photoWrapper" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
-			<div *ngIf="!selectedPhoto">
-				<div class="dropPhoto" *ngIf="!user.image_url; else existingPhoto">
-					<div class="dropPhotoInner">
-						<mat-icon>tv</mat-icon>
-						<p>Drop your photo here</p>
-					</div>
-				</div>
-				<ng-template #existingPhoto>
-					<div class="existingPhoto">
-						<div class="existingPhotoInner">
-							<img class="image" [src]="user.image_url" />
-							<button mat-button>
-								<label for="photo-upload"> Select new image </label>
-							</button>
-						</div>
-					</div>
-				</ng-template>
-			</div>
-			<div *ngIf="selectedPhoto">
-				<div class="dropPhoto">
-					<div class="dropPhotoInner">
-						<mat-icon>image</mat-icon>
-						<p>Image selected</p>
-					</div>
+		<label
+			for="photo-upload"
+			*ngIf="!selectedPhoto"
+			class="photoWrapper"
+			(drop)="onFileDrop($event)"
+			(dragover)="onDragOver($event)"
+		>
+			<div class="dropPhoto" *ngIf="!user.image_url; else existingPhoto">
+				<div class="dropPhotoInner">
+					<mat-icon>tv</mat-icon>
+					<p>Drop your photo here</p>
 				</div>
 			</div>
+			<ng-template #existingPhoto>
+				<div class="existingPhoto">
+					<div class="existingPhotoInner">
+						<img class="image" [src]="user.image_url" />
+					</div>
+				</div>
+			</ng-template>
 		</label>
+
+		<div *ngIf="selectedPhoto" class="photoWrapper">
+			<div class="existingPhoto">
+				<div *ngIf="uploadedImageUrl" class="existingPhotoInner">
+					<mat-icon class="deleteImage" (click)="onClearClick()">clear</mat-icon>
+					<img class="image" [src]="uploadedImageUrl" />
+				</div>
+				<div *ngIf="!uploadedImageUrl">
+					<mat-icon>image</mat-icon>
+					<p>Image loading</p>
+				</div>
+			</div>
+		</div>
+		<button mat-button>
+			<label for="photo-upload"> SELECT NEW IMAGE </label>
+		</button>
 		<input type="file" id="photo-upload" (change)="onFileInputChange($event)" />
 		<button mat-button *ngIf="selectedPhoto" (click)="onUploadClick()">UPLOAD IMAGE</button>
 	</div>
