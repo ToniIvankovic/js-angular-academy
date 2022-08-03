@@ -33,7 +33,7 @@
     margin-bottom: 2em;
 }
 
-.dropPhoto, .existingPhoto{
+.dropPhoto, .existingPhoto, .photoWrapper{
     width: 100%;
     height: 400px;
 }
@@ -90,4 +90,16 @@
     border-radius: 32px;
     color: s.$dark_purple;
     padding: 0.5em 2em;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+label{
+    display: block;
+}
+
+button{
+    margin: 1em;
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IUser } from 'src/app/interfaces/user.interface';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
 	selector: 'app-profile',
@@ -9,8 +10,39 @@ import { IUser } from 'src/app/interfaces/user.interface';
 	styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-	public user$?: Observable<IUser | null>;
-	constructor(private readonly authService: AuthService) {
-		this.user$ = authService.getCurrentUser().pipe(tap(console.log));
+	public user$?: Observable<IUser | undefined>;
+	public selectedPhoto: boolean = false;
+	private file?: File;
+
+	constructor(private readonly authService: AuthService, private readonly userService: UserService) {
+		this.user$ = authService.getCurrentUser();
+	}
+
+	public onFileDrop(event: DragEvent) {
+		event.preventDefault();
+		this.prepareFileForUpload(event.dataTransfer?.files[0]);
+	}
+
+	public onDragOver(event: DragEvent) {
+		event.preventDefault();
+	}
+
+	public onFileInputChange(event: Event) {
+		const inputElement = event.target as HTMLInputElement;
+		this.prepareFileForUpload((inputElement.files as FileList)[0]);
+	}
+
+	private prepareFileForUpload(file: File | undefined) {
+		this.selectedPhoto = true;
+		this.file = file;
+		console.log(file);
+	}
+
+	public onUploadClick() {
+		console.log(this.file);
+		this.user$?.subscribe((user) => {
+			console.log(user);
+			this.userService.updateUserImage(user!, this.file!);
+		});
 	}
 }
